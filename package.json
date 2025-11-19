@@ -1,6 +1,6 @@
 {
-    "name": "ts-sdk",
-    "version": "0.5.2",
+    "name": "@flasz-b2b/ts-sdk",
+    "version": "0.0.4",
     "private": false,
     "repository": "github:flaqz-b2b/ts-sdk",
     "type": "commonjs",
