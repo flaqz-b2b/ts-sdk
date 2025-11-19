@@ -1,14 +1,14 @@
 # FlaqzB2B TypeScript Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fflaqz-b2b%2Fts-sdk)
-[![npm shield](https://img.shields.io/npm/v/@flasz-b2b/ts-sdk)](https://www.npmjs.com/package/@flasz-b2b/ts-sdk)
+[![npm shield](https://img.shields.io/npm/v/@flaqz-b2b/ts-sdk)](https://www.npmjs.com/package/@flaqz-b2b/ts-sdk)
 
 The FlaqzB2B TypeScript library provides convenient access to the FlaqzB2B APIs from TypeScript.
 
 ## Installation
 
 ```sh
-npm i -s @flasz-b2b/ts-sdk
+npm i -s @flaqz-b2b/ts-sdk
 ```
 
 ## Reference
@@ -20,7 +20,7 @@ A full reference for this library is available [here](https://github.com/flaqz-b
 Instantiate and use the client with the following:
 
 ```typescript
-import { FlaqzAppClient } from "@flasz-b2b/ts-sdk";
+import { FlaqzAppClient } from "@flaqz-b2b/ts-sdk";
 
 const client = new FlaqzAppClient;
 await client.customer.createManyCustomers({
@@ -43,7 +43,7 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { FlaqzApp } from "@flasz-b2b/ts-sdk";
+import { FlaqzApp } from "@flaqz-b2b/ts-sdk";
 
 const request: FlaqzApp.CreateManyCustomersSchema = {
     ...
@@ -56,7 +56,7 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { FlaqzAppError } from "@flasz-b2b/ts-sdk";
+import { FlaqzAppError } from "@flaqz-b2b/ts-sdk";
 
 try {
     await client.customer.createManyCustomers(...);
@@ -155,7 +155,7 @@ console.log(rawResponse.headers['X-My-Header']);
 The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
 
 ```typescript
-import { FlaqzAppClient, logging } from "@flasz-b2b/ts-sdk";
+import { FlaqzAppClient, logging } from "@flaqz-b2b/ts-sdk";
 
 const client = new FlaqzAppClient({
     ...
@@ -233,7 +233,7 @@ The SDK provides a way for you to customize the underlying HTTP client / Fetch f
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { FlaqzAppClient } from "@flasz-b2b/ts-sdk";
+import { FlaqzAppClient } from "@flaqz-b2b/ts-sdk";
 
 const client = new FlaqzAppClient({
     ...
