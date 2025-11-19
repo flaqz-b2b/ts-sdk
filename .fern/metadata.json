@@ -1,0 +1,8 @@
+{
+    "cliVersion": "1.11.0",
+    "generatorName": "fernapi/fern-typescript-sdk",
+    "generatorVersion": "3.32.0",
+    "generatorConfig": {
+        "namespaceExport": "FlaqzApp"
+    }
+}
