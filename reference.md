@@ -62,7 +62,7 @@ await client.customer.createManyCustomers({
             phoneNumber: "+10000000000",
             obs: "Mr. Awesome like oranges",
             cpf: "00000000000",
-            birthDate: "2000-01-01T00:00:00Z",
+            birthDate: "2000-01-01",
             ppInfo: "Under financial history analisys"
         }]
 });
