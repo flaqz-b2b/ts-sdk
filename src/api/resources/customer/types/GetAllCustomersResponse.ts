@@ -6,11 +6,5 @@ export interface GetAllCustomersResponse {
     status: number;
     success: boolean;
     message: string;
-    others: GetAllCustomersResponse.Others;
-}
-
-export namespace GetAllCustomersResponse {
-    export interface Others {
-        data?: FlaqzApp.Customer[];
-    }
+    others: FlaqzApp.GetAllCustomersResponseOthers;
 }

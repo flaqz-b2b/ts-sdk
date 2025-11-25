@@ -48,7 +48,7 @@ describe("CustomerClient", () => {
                         cpf: "00000000000",
                         birthDate: "2000-01-01",
                         ppInfo: "Under financial history analisys",
-                        createdAt: "2000-01-01T00:00:00Z",
+                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
                     },
                 ],
             },
