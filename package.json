@@ -1,6 +1,6 @@
 {
     "name": "@flaqz-b2b/ts-sdk",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "private": false,
     "repository": "github:flaqz-b2b/ts-sdk",
     "type": "commonjs",
@@ -19,6 +19,18 @@
                 "default": "./dist/cjs/index.js"
             },
             "default": "./dist/cjs/index.js"
+        },
+        "./serialization": {
+            "types": "./dist/cjs/serialization/index.d.ts",
+            "import": {
+                "types": "./dist/esm/serialization/index.d.mts",
+                "default": "./dist/esm/serialization/index.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/serialization/index.d.ts",
+                "default": "./dist/cjs/serialization/index.js"
+            },
+            "default": "./dist/cjs/serialization/index.js"
         },
         "./package.json": "./package.json"
     },

@@ -16,5 +16,5 @@ export interface Customer {
     birthDate: string | null;
     /** Must store information about customer's loan */
     ppInfo: string | null;
-    createdAt: string;
+    createdAt: Date;
 }

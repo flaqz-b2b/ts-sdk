@@ -3,6 +3,7 @@
     "generatorName": "fernapi/fern-typescript-sdk",
     "generatorVersion": "3.32.0",
     "generatorConfig": {
-        "namespaceExport": "FlaqzApp"
+        "namespaceExport": "FlaqzApp",
+        "noSerdeLayer": false
     }
 }
