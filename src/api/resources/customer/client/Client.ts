@@ -23,20 +23,33 @@ export class CustomerClient {
     }
 
     /**
+     * @param {FlaqzApp.GetAllCustomersRequest} request
      * @param {CustomerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.customer.getAllCustomers()
      */
     public getAllCustomers(
+        request: FlaqzApp.GetAllCustomersRequest = {},
         requestOptions?: CustomerClient.RequestOptions,
     ): core.HttpResponsePromise<FlaqzApp.GetAllCustomersResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getAllCustomers(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getAllCustomers(request, requestOptions));
     }
 
     private async __getAllCustomers(
+        request: FlaqzApp.GetAllCustomersRequest = {},
         requestOptions?: CustomerClient.RequestOptions,
     ): Promise<core.WithRawResponse<FlaqzApp.GetAllCustomersResponse>> {
+        const { page, pageSize } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (page !== undefined) {
+            _queryParams.page = page?.toString() ?? null;
+        }
+
+        if (pageSize !== undefined) {
+            _queryParams.pageSize = pageSize?.toString() ?? null;
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
@@ -47,7 +60,7 @@ export class CustomerClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -100,12 +113,8 @@ export class CustomerClient {
      *     await client.customer.createManyCustomers({
      *         customers: [{
      *                 email: "awesome@customer.com",
-     *                 firstName: "Awesome",
-     *                 lastName: "Customer",
+     *                 fullName: "Awesome Customer",
      *                 phoneNumber: "+10000000000",
-     *                 obs: "Mr. Awesome like oranges",
-     *                 cpf: "00000000000",
-     *                 birthDate: "2000-01-01",
      *                 ppInfo: "Under financial history analisys"
      *             }]
      *     })
