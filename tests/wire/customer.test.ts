@@ -13,20 +13,19 @@ describe("CustomerClient", () => {
             success: true,
             message: "message",
             others: {
-                data: [
-                    {
-                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                        email: "awesome@customer.com",
-                        firstName: "Awesome",
-                        lastName: "Customer",
-                        phoneNumber: "+10000000000",
-                        obs: "Mr. Awesome like oranges",
-                        cpf: "00000000000",
-                        birthDate: "2000-01-01",
-                        ppInfo: "Under financial history analisys",
-                        createdAt: "2000-01-01T00:00:00Z",
-                    },
-                ],
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            email: "awesome@customer.com",
+                            fullName: "Awesome Customer",
+                            phoneNumber: "+10000000000",
+                            ppInfo: "Under financial history analisys",
+                            createdAt: "2000-01-01T00:00:00Z",
+                        },
+                    ],
+                    total: "total",
+                },
             },
         };
         server.mockEndpoint().get("/api/v1/customers").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -37,20 +36,19 @@ describe("CustomerClient", () => {
             success: true,
             message: "message",
             others: {
-                data: [
-                    {
-                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                        email: "awesome@customer.com",
-                        firstName: "Awesome",
-                        lastName: "Customer",
-                        phoneNumber: "+10000000000",
-                        obs: "Mr. Awesome like oranges",
-                        cpf: "00000000000",
-                        birthDate: "2000-01-01",
-                        ppInfo: "Under financial history analisys",
-                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
-                    },
-                ],
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            email: "awesome@customer.com",
+                            fullName: "Awesome Customer",
+                            phoneNumber: "+10000000000",
+                            ppInfo: "Under financial history analisys",
+                            createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                        },
+                    ],
+                    total: "total",
+                },
             },
         });
     });
@@ -62,12 +60,8 @@ describe("CustomerClient", () => {
             customers: [
                 {
                     email: "awesome@customer.com",
-                    firstName: "Awesome",
-                    lastName: "Customer",
+                    fullName: "Awesome Customer",
                     phoneNumber: "+10000000000",
-                    obs: "Mr. Awesome like oranges",
-                    cpf: "00000000000",
-                    birthDate: "2000-01-01",
                     ppInfo: "Under financial history analisys",
                 },
             ],
@@ -86,12 +80,8 @@ describe("CustomerClient", () => {
             customers: [
                 {
                     email: "awesome@customer.com",
-                    firstName: "Awesome",
-                    lastName: "Customer",
+                    fullName: "Awesome Customer",
                     phoneNumber: "+10000000000",
-                    obs: "Mr. Awesome like oranges",
-                    cpf: "00000000000",
-                    birthDate: "2000-01-01",
                     ppInfo: "Under financial history analisys",
                 },
             ],

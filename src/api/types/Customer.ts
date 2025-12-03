@@ -6,14 +6,9 @@
 export interface Customer {
     id: string;
     email: string;
-    firstName: string;
-    lastName: string;
+    fullName: string;
     /** Must be stored in E.164 format */
     phoneNumber: string;
-    /** Information about customer preferences and things like that */
-    obs: string | null;
-    cpf: string;
-    birthDate: string | null;
     /** Must store information about customer's loan */
     ppInfo: string | null;
     createdAt: Date;

@@ -26,12 +26,8 @@ const client = new FlaqzAppClient;
 await client.customer.createManyCustomers({
     customers: [{
             email: "awesome@customer.com",
-            firstName: "Awesome",
-            lastName: "Customer",
+            fullName: "Awesome Customer",
             phoneNumber: "+10000000000",
-            obs: "Mr. Awesome like oranges",
-            cpf: "00000000000",
-            birthDate: "2000-01-01",
             ppInfo: "Under financial history analisys"
         }]
 });
@@ -45,7 +41,7 @@ following namespace:
 ```typescript
 import { FlaqzApp } from "@flaqz-b2b/ts-sdk";
 
-const request: FlaqzApp.CreateManyCustomersSchema = {
+const request: FlaqzApp.GetAllCustomersRequest = {
     ...
 };
 ```

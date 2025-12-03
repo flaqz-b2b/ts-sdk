@@ -8,12 +8,8 @@ export const Customer: core.serialization.ObjectSchema<serializers.Customer.Raw,
     core.serialization.object({
         id: core.serialization.string(),
         email: core.serialization.string(),
-        firstName: core.serialization.string(),
-        lastName: core.serialization.string(),
+        fullName: core.serialization.string(),
         phoneNumber: core.serialization.string(),
-        obs: core.serialization.string().nullable(),
-        cpf: core.serialization.string(),
-        birthDate: core.serialization.string().nullable(),
         ppInfo: core.serialization.string().nullable(),
         createdAt: core.serialization.date(),
     });
@@ -22,12 +18,8 @@ export declare namespace Customer {
     export interface Raw {
         id: string;
         email: string;
-        firstName: string;
-        lastName: string;
+        fullName: string;
         phoneNumber: string;
-        obs?: string | null;
-        cpf: string;
-        birthDate?: string | null;
         ppInfo?: string | null;
         createdAt: string;
     }
