@@ -10,12 +10,12 @@ export const GetAssistantsResponseOthersData: core.serialization.ObjectSchema<
     FlaqzApp.GetAssistantsResponseOthersData
 > = core.serialization.object({
     data: core.serialization.list(Assistant),
-    total: core.serialization.string(),
+    total: core.serialization.number(),
 });
 
 export declare namespace GetAssistantsResponseOthersData {
     export interface Raw {
         data: Assistant.Raw[];
-        total: string;
+        total: number;
     }
 }

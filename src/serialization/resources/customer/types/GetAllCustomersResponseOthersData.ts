@@ -10,12 +10,12 @@ export const GetAllCustomersResponseOthersData: core.serialization.ObjectSchema<
     FlaqzApp.GetAllCustomersResponseOthersData
 > = core.serialization.object({
     data: core.serialization.list(Customer),
-    total: core.serialization.string(),
+    total: core.serialization.number(),
 });
 
 export declare namespace GetAllCustomersResponseOthersData {
     export interface Raw {
         data: Customer.Raw[];
-        total: string;
+        total: number;
     }
 }

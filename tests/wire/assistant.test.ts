@@ -61,7 +61,7 @@ describe("AssistantClient", () => {
                             createdAt: "2000-01-01T00:00:00Z",
                         },
                     ],
-                    total: "total",
+                    total: 1,
                 },
             },
         };
@@ -124,7 +124,7 @@ describe("AssistantClient", () => {
                             createdAt: new Date("2000-01-01T00:00:00.000Z"),
                         },
                     ],
-                    total: "total",
+                    total: 1,
                 },
             },
         });

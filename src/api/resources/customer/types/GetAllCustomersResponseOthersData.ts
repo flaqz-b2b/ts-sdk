@@ -4,5 +4,5 @@ import type * as FlaqzApp from "../../../index.js";
 
 export interface GetAllCustomersResponseOthersData {
     data: FlaqzApp.Customer[];
-    total: string;
+    total: number;
 }
