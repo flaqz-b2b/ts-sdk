@@ -67,7 +67,10 @@ describe("AssistantClient", () => {
         };
         server.mockEndpoint().get("/api/v1/assistants").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.assistant.getAssistants();
+        const response = await client.assistant.getAssistants({
+            page: 1,
+            pageSize: 20,
+        });
         expect(response).toEqual({
             status: 1,
             success: true,

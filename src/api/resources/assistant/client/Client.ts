@@ -27,29 +27,26 @@ export class AssistantClient {
      * @param {AssistantClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.assistant.getAssistants()
+     *     await client.assistant.getAssistants({
+     *         page: 1,
+     *         pageSize: 20
+     *     })
      */
     public getAssistants(
-        request: FlaqzApp.GetAssistantsRequest = {},
+        request: FlaqzApp.GetAssistantsRequest,
         requestOptions?: AssistantClient.RequestOptions,
     ): core.HttpResponsePromise<FlaqzApp.GetAssistantsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getAssistants(request, requestOptions));
     }
 
     private async __getAssistants(
-        request: FlaqzApp.GetAssistantsRequest = {},
+        request: FlaqzApp.GetAssistantsRequest,
         requestOptions?: AssistantClient.RequestOptions,
     ): Promise<core.WithRawResponse<FlaqzApp.GetAssistantsResponse>> {
         const { page, pageSize } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (page !== undefined) {
-            _queryParams.page = page?.toString() ?? null;
-        }
-
-        if (pageSize !== undefined) {
-            _queryParams.pageSize = pageSize?.toString() ?? null;
-        }
-
+        _queryParams.page = page.toString();
+        _queryParams.pageSize = pageSize.toString();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(

@@ -5,7 +5,7 @@
  */
 export interface CreateCustomerInput {
     email: string;
-    fullName: string;
+    fullName?: string | null;
     /** Must be stored in E.164 format */
     phoneNumber: string;
     /** Must store information about customer's loan */
