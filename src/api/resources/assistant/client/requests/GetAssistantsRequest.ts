@@ -2,9 +2,12 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         page: 1,
+ *         pageSize: 20
+ *     }
  */
 export interface GetAssistantsRequest {
-    page?: number | null;
-    pageSize?: number | null;
+    page: number;
+    pageSize: number;
 }

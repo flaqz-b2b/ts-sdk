@@ -30,7 +30,10 @@ describe("CustomerClient", () => {
         };
         server.mockEndpoint().get("/api/v1/customers").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.customer.getAllCustomers();
+        const response = await client.customer.getAllCustomers({
+            page: 1,
+            pageSize: 20,
+        });
         expect(response).toEqual({
             status: 1,
             success: true,

@@ -9,7 +9,7 @@ export const CreateCustomerInput: core.serialization.ObjectSchema<
     FlaqzApp.CreateCustomerInput
 > = core.serialization.object({
     email: core.serialization.string(),
-    fullName: core.serialization.string(),
+    fullName: core.serialization.string().optionalNullable(),
     phoneNumber: core.serialization.string(),
     ppInfo: core.serialization.string().nullable(),
 });
@@ -17,7 +17,7 @@ export const CreateCustomerInput: core.serialization.ObjectSchema<
 export declare namespace CreateCustomerInput {
     export interface Raw {
         email: string;
-        fullName: string;
+        fullName?: (string | null | undefined) | null;
         phoneNumber: string;
         ppInfo?: string | null;
     }

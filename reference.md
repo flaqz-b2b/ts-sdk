@@ -13,7 +13,10 @@
 <dd>
 
 ```typescript
-await client.customer.getAllCustomers();
+await client.customer.getAllCustomers({
+    page: 1,
+    pageSize: 20
+});
 
 ```
 </dd>
@@ -119,7 +122,10 @@ await client.customer.createManyCustomers({
 <dd>
 
 ```typescript
-await client.assistant.getAssistants();
+await client.assistant.getAssistants({
+    page: 1,
+    pageSize: 20
+});
 
 ```
 </dd>

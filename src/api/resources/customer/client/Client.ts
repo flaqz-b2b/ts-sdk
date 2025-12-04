@@ -27,29 +27,26 @@ export class CustomerClient {
      * @param {CustomerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.customer.getAllCustomers()
+     *     await client.customer.getAllCustomers({
+     *         page: 1,
+     *         pageSize: 20
+     *     })
      */
     public getAllCustomers(
-        request: FlaqzApp.GetAllCustomersRequest = {},
+        request: FlaqzApp.GetAllCustomersRequest,
         requestOptions?: CustomerClient.RequestOptions,
     ): core.HttpResponsePromise<FlaqzApp.GetAllCustomersResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getAllCustomers(request, requestOptions));
     }
 
     private async __getAllCustomers(
-        request: FlaqzApp.GetAllCustomersRequest = {},
+        request: FlaqzApp.GetAllCustomersRequest,
         requestOptions?: CustomerClient.RequestOptions,
     ): Promise<core.WithRawResponse<FlaqzApp.GetAllCustomersResponse>> {
         const { page, pageSize } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (page !== undefined) {
-            _queryParams.page = page?.toString() ?? null;
-        }
-
-        if (pageSize !== undefined) {
-            _queryParams.pageSize = pageSize?.toString() ?? null;
-        }
-
+        _queryParams.page = page.toString();
+        _queryParams.pageSize = pageSize.toString();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
