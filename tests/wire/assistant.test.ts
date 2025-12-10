@@ -275,4 +275,155 @@ describe("AssistantClient", () => {
             },
         });
     });
+
+    test("updateAssistant", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const rawRequestBody = {
+            newData: {
+                name: "My Assistant 01",
+                voiceId: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
+                modelId: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
+                transcriberId: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
+                prompt: "You're a assistant that call to people and ask if they know how to make a carrot cake",
+                firstMsg: "Hello!",
+                firstMsgMode: "SPEAKS_FIRST",
+                voiceMailMsg: "Who uses voicemail in 2077 man",
+                endMsg: "Bye!",
+                bgSound: "OFFICE",
+                bgDenoising: true,
+                structuredOutputIds: ["SALE_COMPLETED", "LEAD_STATUS"],
+            },
+        };
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    name: "My Assistant 01",
+                    slug: "my-assistant-01",
+                    voiceId: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
+                    voice: {
+                        id: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
+                        provider: "11labs",
+                        model: "eleven_flash_v2",
+                        voiceId: "33B4UnXyTNbgLmdEDh5P",
+                        autoMode: true,
+                        speed: 1,
+                        style: 0,
+                        stability: 0.5,
+                        similarity: 0.5,
+                        optimize: "optimize",
+                        createdAt: "2000-01-01T00:00:00Z",
+                    },
+                    modelId: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
+                    model: {
+                        id: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
+                        model: "llama-3.1-8b-instant",
+                        provider: "groq",
+                        maxTokens: "maxTokens",
+                        temperature: 0.6,
+                        createdAt: "2000-01-01T00:00:00Z",
+                    },
+                    transcriberId: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
+                    transcriber: {
+                        id: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
+                        model: "nova-2",
+                        language: "pt-BR",
+                        provider: "deepgram",
+                        createdAt: "2000-01-01T00:00:00Z",
+                    },
+                    prompt: "You're a assistant that call to people and ask if they know how to make a carrot cake",
+                    firstMsg: "Hello!",
+                    firstMsgMode: "SPEAKS_FIRST",
+                    voiceMailMsg: "Who uses voicemail in 2077 man",
+                    endMsg: "Bye!",
+                    bgSound: "OFFICE",
+                    bgDenoising: true,
+                    structuredOutputIds: ["SALE_COMPLETED", "LEAD_STATUS"],
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .put("/api/v1/assistants/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.assistant.updateAssistant({
+            id: "id",
+            newData: {
+                name: "My Assistant 01",
+                voiceId: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
+                modelId: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
+                transcriberId: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
+                prompt: "You're a assistant that call to people and ask if they know how to make a carrot cake",
+                firstMsg: "Hello!",
+                firstMsgMode: "SPEAKS_FIRST",
+                voiceMailMsg: "Who uses voicemail in 2077 man",
+                endMsg: "Bye!",
+                bgSound: "OFFICE",
+                bgDenoising: true,
+                structuredOutputIds: ["SALE_COMPLETED", "LEAD_STATUS"],
+            },
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    name: "My Assistant 01",
+                    slug: "my-assistant-01",
+                    voiceId: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
+                    voice: {
+                        id: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
+                        provider: "11labs",
+                        model: "eleven_flash_v2",
+                        voiceId: "33B4UnXyTNbgLmdEDh5P",
+                        autoMode: true,
+                        speed: 1,
+                        style: 0,
+                        stability: 0.5,
+                        similarity: 0.5,
+                        optimize: "optimize",
+                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                    },
+                    modelId: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
+                    model: {
+                        id: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
+                        model: "llama-3.1-8b-instant",
+                        provider: "groq",
+                        maxTokens: "maxTokens",
+                        temperature: 0.6,
+                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                    },
+                    transcriberId: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
+                    transcriber: {
+                        id: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
+                        model: "nova-2",
+                        language: "pt-BR",
+                        provider: "deepgram",
+                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                    },
+                    prompt: "You're a assistant that call to people and ask if they know how to make a carrot cake",
+                    firstMsg: "Hello!",
+                    firstMsgMode: "SPEAKS_FIRST",
+                    voiceMailMsg: "Who uses voicemail in 2077 man",
+                    endMsg: "Bye!",
+                    bgSound: "OFFICE",
+                    bgDenoising: true,
+                    structuredOutputIds: ["SALE_COMPLETED", "LEAD_STATUS"],
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                },
+            },
+        });
+    });
 });
