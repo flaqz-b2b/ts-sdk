@@ -187,4 +187,86 @@ export class CustomerClient {
                 });
         }
     }
+
+    /**
+     * @param {FlaqzApp.SearchCustomersRequest} request
+     * @param {CustomerClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.customer.searchCustomers({
+     *         page: 1,
+     *         pageSize: 20,
+     *         query: "Awesome Customer"
+     *     })
+     */
+    public searchCustomers(
+        request: FlaqzApp.SearchCustomersRequest,
+        requestOptions?: CustomerClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.SearchCustomersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__searchCustomers(request, requestOptions));
+    }
+
+    private async __searchCustomers(
+        request: FlaqzApp.SearchCustomersRequest,
+        requestOptions?: CustomerClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.SearchCustomersResponse>> {
+        const { page, pageSize, query } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        _queryParams.page = page.toString();
+        _queryParams.pageSize = pageSize.toString();
+        _queryParams.query = query;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                "api/v1/customers/search",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.SearchCustomersResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/customers/search.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

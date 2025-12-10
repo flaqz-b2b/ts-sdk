@@ -1,1 +1,1 @@
-export { CreateAssistantInput } from "./CreateAssistantInput.js";
+export { UpdateAssistant } from "./UpdateAssistant.js";
