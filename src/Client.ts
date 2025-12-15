@@ -2,7 +2,6 @@
 
 import { AssistantClient } from "./api/resources/assistant/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
-import { VapiClient } from "./api/resources/vapi/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { normalizeClientOptions } from "./BaseClient.js";
 
@@ -16,7 +15,6 @@ export class FlaqzAppClient {
     protected readonly _options: FlaqzAppClient.Options;
     protected _customer: CustomerClient | undefined;
     protected _assistant: AssistantClient | undefined;
-    protected _vapi: VapiClient | undefined;
 
     constructor(options: FlaqzAppClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -28,9 +26,5 @@ export class FlaqzAppClient {
 
     public get assistant(): AssistantClient {
         return (this._assistant ??= new AssistantClient(this._options));
-    }
-
-    public get vapi(): VapiClient {
-        return (this._vapi ??= new VapiClient(this._options));
     }
 }
