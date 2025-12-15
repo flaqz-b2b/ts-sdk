@@ -12,5 +12,7 @@ export * from "./CreateTranscriberInput.js";
 export * from "./CreateVoiceInput.js";
 export * from "./Customer.js";
 export * from "./Model.js";
+export * from "./SearchAssistant.js";
+export * from "./SearchCustomer.js";
 export * from "./Transcriber.js";
 export * from "./Voice.js";
