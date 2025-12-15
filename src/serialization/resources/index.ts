@@ -4,5 +4,3 @@ export * from "./assistant/types/index.js";
 export * from "./customer/client/requests/index.js";
 export * as customer from "./customer/index.js";
 export * from "./customer/types/index.js";
-export * as vapi from "./vapi/index.js";
-export * from "./vapi/types/index.js";
