@@ -340,3 +340,57 @@ await client.assistant.updateAssistant({
 </dd>
 </dl>
 </details>
+
+## Vapi
+<details><summary><code>client.vapi.<a href="/src/api/resources/vapi/client/Client.ts">searchAssistants</a>({ ...params }) -> FlaqzApp.SearchAssistantsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.vapi.searchAssistants({
+    page: 1,
+    pageSize: 20,
+    query: "Awesome Customer"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SearchAssistantsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VapiClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
