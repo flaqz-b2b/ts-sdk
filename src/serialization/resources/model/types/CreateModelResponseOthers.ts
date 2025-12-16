@@ -3,17 +3,17 @@
 import type * as FlaqzApp from "../../../../api/index.js";
 import * as core from "../../../../core/index.js";
 import type * as serializers from "../../../index.js";
-import { Assistant } from "../../../types/Assistant.js";
+import { Model } from "../../../types/Model.js";
 
 export const CreateModelResponseOthers: core.serialization.ObjectSchema<
     serializers.CreateModelResponseOthers.Raw,
     FlaqzApp.CreateModelResponseOthers
 > = core.serialization.object({
-    data: Assistant.optional(),
+    data: Model.optional(),
 });
 
 export declare namespace CreateModelResponseOthers {
     export interface Raw {
-        data?: Assistant.Raw | null;
+        data?: Model.Raw | null;
     }
 }

@@ -3,5 +3,5 @@
 import type * as FlaqzApp from "../../../index.js";
 
 export interface CreateModelResponseOthers {
-    data?: FlaqzApp.Assistant;
+    data?: FlaqzApp.Model;
 }
