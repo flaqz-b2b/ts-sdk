@@ -2,6 +2,9 @@
 
 import { AssistantClient } from "./api/resources/assistant/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
+import { ModelClient } from "./api/resources/model/client/Client.js";
+import { TranscriberClient } from "./api/resources/transcriber/client/Client.js";
+import { VoiceClient } from "./api/resources/voice/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { normalizeClientOptions } from "./BaseClient.js";
 
@@ -15,6 +18,9 @@ export class FlaqzAppClient {
     protected readonly _options: FlaqzAppClient.Options;
     protected _customer: CustomerClient | undefined;
     protected _assistant: AssistantClient | undefined;
+    protected _model: ModelClient | undefined;
+    protected _transcriber: TranscriberClient | undefined;
+    protected _voice: VoiceClient | undefined;
 
     constructor(options: FlaqzAppClient.Options = {}) {
         this._options = normalizeClientOptions(options);
@@ -26,5 +32,17 @@ export class FlaqzAppClient {
 
     public get assistant(): AssistantClient {
         return (this._assistant ??= new AssistantClient(this._options));
+    }
+
+    public get model(): ModelClient {
+        return (this._model ??= new ModelClient(this._options));
+    }
+
+    public get transcriber(): TranscriberClient {
+        return (this._transcriber ??= new TranscriberClient(this._options));
+    }
+
+    public get voice(): VoiceClient {
+        return (this._voice ??= new VoiceClient(this._options));
     }
 }

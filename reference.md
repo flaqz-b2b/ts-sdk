@@ -393,3 +393,274 @@ await client.assistant.searchAssistants({
 </dd>
 </dl>
 </details>
+
+## Model
+<details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">createModel</a>({ ...params }) -> FlaqzApp.CreateModelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.model.createModel({
+    model: "nova-2",
+    provider: "deepgram"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.CreateModelInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Transcriber
+<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">gettranscribers</a>({ ...params }) -> FlaqzApp.GettranscribersResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.transcriber.gettranscribers({
+    page: 1,
+    pageSize: 20
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.GettranscribersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriberClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">createTranscriber</a>({ ...params }) -> FlaqzApp.CreateTranscriberResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.transcriber.createTranscriber({
+    model: "nova-2",
+    language: "pt-BR",
+    provider: "deepgram"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.CreateTranscriberInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriberClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Voice
+<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">getVoices</a>({ ...params }) -> FlaqzApp.GetVoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voice.getVoices({
+    page: 1,
+    pageSize: 20
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.GetVoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoiceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">createVoice</a>({ ...params }) -> FlaqzApp.CreateVoiceResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voice.createVoice({
+    provider: "11labs",
+    model: "eleven_flash_v2",
+    voiceId: "33B4UnXyTNbgLmdEDh5P",
+    autoMode: true,
+    speed: 1,
+    style: 0,
+    stability: 0.5,
+    similarity: 0.5,
+    optimize: 2
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.CreateVoiceInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoiceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
