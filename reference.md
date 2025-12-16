@@ -409,8 +409,10 @@ await client.assistant.searchAssistants({
 
 ```typescript
 await client.model.createModel({
-    model: "nova-2",
-    provider: "deepgram"
+    model: "llama-3.1-8b-instant",
+    provider: "groq",
+    maxTokens: 128,
+    temperature: 0.6
 });
 
 ```
