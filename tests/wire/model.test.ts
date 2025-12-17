@@ -54,4 +54,63 @@ describe("ModelClient", () => {
             },
         });
     });
+
+    test("searchModels", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            model: "llama-3.1-8b-instant",
+                            provider: "groq",
+                            maxTokens: "maxTokens",
+                            temperature: 0.6,
+                            createdAt: "2000-01-01T00:00:00Z",
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .get("/api/v1/models/search")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.model.searchModels({
+            page: 1,
+            pageSize: 20,
+            query: "Awesome Customer",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            model: "llama-3.1-8b-instant",
+                            provider: "groq",
+                            maxTokens: "maxTokens",
+                            temperature: 0.6,
+                            createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        });
+    });
 });

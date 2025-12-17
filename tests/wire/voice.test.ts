@@ -141,4 +141,73 @@ describe("VoiceClient", () => {
             },
         });
     });
+
+    test("searchVoices", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            provider: "11labs",
+                            model: "eleven_flash_v2",
+                            voiceId: "33B4UnXyTNbgLmdEDh5P",
+                            autoMode: true,
+                            speed: 1,
+                            style: 0,
+                            stability: 0.5,
+                            similarity: 0.5,
+                            optimize: "optimize",
+                            createdAt: "2000-01-01T00:00:00Z",
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .get("/api/v1/voices/search")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.voice.searchVoices({
+            page: 1,
+            pageSize: 20,
+            query: "Awesome Customer",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            provider: "11labs",
+                            model: "eleven_flash_v2",
+                            voiceId: "33B4UnXyTNbgLmdEDh5P",
+                            autoMode: true,
+                            speed: 1,
+                            style: 0,
+                            stability: 0.5,
+                            similarity: 0.5,
+                            optimize: "optimize",
+                            createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        });
+    });
 });
