@@ -11,5 +11,8 @@ export * from "./Customer.js";
 export * from "./Model.js";
 export * from "./SearchAssistant.js";
 export * from "./SearchCustomer.js";
+export * from "./SearchModel.js";
+export * from "./SearchTranscriber.js";
+export * from "./SearchVoice.js";
 export * from "./Transcriber.js";
 export * from "./Voice.js";

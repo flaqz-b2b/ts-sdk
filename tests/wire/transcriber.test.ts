@@ -107,4 +107,61 @@ describe("TranscriberClient", () => {
             },
         });
     });
+
+    test("searchTranscribers", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            model: "nova-2",
+                            language: "pt-BR",
+                            provider: "deepgram",
+                            createdAt: "2000-01-01T00:00:00Z",
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .get("/api/v1/transcribers/search")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.transcriber.searchTranscribers({
+            page: 1,
+            pageSize: 20,
+            query: "Awesome Customer",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            model: "nova-2",
+                            language: "pt-BR",
+                            provider: "deepgram",
+                            createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        });
+    });
 });

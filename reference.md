@@ -449,6 +449,59 @@ await client.model.createModel({
 </dl>
 </details>
 
+<details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">searchModels</a>({ ...params }) -> FlaqzApp.SearchModelsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.model.searchModels({
+    page: 1,
+    pageSize: 20,
+    query: "Awesome Customer"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SearchModelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Transcriber
 <details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">gettranscribers</a>({ ...params }) -> FlaqzApp.GettranscribersResponse</code></summary>
 <dl>
@@ -536,6 +589,59 @@ await client.transcriber.createTranscriber({
 <dd>
 
 **request:** `FlaqzApp.CreateTranscriberInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriberClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">searchTranscribers</a>({ ...params }) -> FlaqzApp.SearchTranscribersResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.transcriber.searchTranscribers({
+    page: 1,
+    pageSize: 20,
+    query: "Awesome Customer"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SearchTranscribersRequest` 
     
 </dd>
 </dl>
@@ -648,6 +754,59 @@ await client.voice.createVoice({
 <dd>
 
 **request:** `FlaqzApp.CreateVoiceInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoiceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">searchVoices</a>({ ...params }) -> FlaqzApp.SearchVoicesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voice.searchVoices({
+    page: 1,
+    pageSize: 20,
+    query: "Awesome Customer"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SearchVoicesRequest` 
     
 </dd>
 </dl>
