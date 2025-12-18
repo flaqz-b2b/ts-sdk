@@ -14,7 +14,7 @@ export const Voice: core.serialization.ObjectSchema<serializers.Voice.Raw, Flaqz
     style: core.serialization.number(),
     stability: core.serialization.number(),
     similarity: core.serialization.number(),
-    optimize: core.serialization.string(),
+    optimize: core.serialization.number(),
     createdAt: core.serialization.date(),
 });
 
@@ -29,7 +29,7 @@ export declare namespace Voice {
         style: number;
         stability: number;
         similarity: number;
-        optimize: string;
+        optimize: number;
         createdAt: string;
     }
 }

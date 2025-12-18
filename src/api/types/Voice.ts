@@ -13,6 +13,6 @@ export interface Voice {
     style: number;
     stability: number;
     similarity: number;
-    optimize: string;
+    optimize: number;
     createdAt: Date;
 }
