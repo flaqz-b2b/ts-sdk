@@ -7,7 +7,7 @@ export interface Model {
     id: string;
     model: string;
     provider: string;
-    maxTokens: string;
+    maxTokens: number;
     temperature: number;
     createdAt: Date;
 }
