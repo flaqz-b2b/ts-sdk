@@ -41,7 +41,7 @@ following namespace:
 ```typescript
 import { FlaqzApp } from "@flaqz-b2b/ts-sdk";
 
-const request: FlaqzApp.GetAllCustomersRequest = {
+const request: FlaqzApp.CreateManyCustomersSchema = {
     ...
 };
 ```

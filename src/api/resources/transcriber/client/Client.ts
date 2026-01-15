@@ -23,30 +23,20 @@ export class TranscriberClient {
     }
 
     /**
-     * @param {FlaqzApp.GettranscribersRequest} request
      * @param {TranscriberClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.transcriber.gettranscribers({
-     *         page: 1,
-     *         pageSize: 20
-     *     })
+     *     await client.transcriber.gettranscribers()
      */
     public gettranscribers(
-        request: FlaqzApp.GettranscribersRequest,
         requestOptions?: TranscriberClient.RequestOptions,
     ): core.HttpResponsePromise<FlaqzApp.GettranscribersResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__gettranscribers(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__gettranscribers(requestOptions));
     }
 
     private async __gettranscribers(
-        request: FlaqzApp.GettranscribersRequest,
         requestOptions?: TranscriberClient.RequestOptions,
     ): Promise<core.WithRawResponse<FlaqzApp.GettranscribersResponse>> {
-        const { page, pageSize } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.page = page.toString();
-        _queryParams.pageSize = pageSize.toString();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
@@ -57,7 +47,7 @@ export class TranscriberClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

@@ -23,30 +23,20 @@ export class CustomerClient {
     }
 
     /**
-     * @param {FlaqzApp.GetAllCustomersRequest} request
      * @param {CustomerClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.customer.getAllCustomers({
-     *         page: 1,
-     *         pageSize: 20
-     *     })
+     *     await client.customer.getAllCustomers()
      */
     public getAllCustomers(
-        request: FlaqzApp.GetAllCustomersRequest,
         requestOptions?: CustomerClient.RequestOptions,
     ): core.HttpResponsePromise<FlaqzApp.GetAllCustomersResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getAllCustomers(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getAllCustomers(requestOptions));
     }
 
     private async __getAllCustomers(
-        request: FlaqzApp.GetAllCustomersRequest,
         requestOptions?: CustomerClient.RequestOptions,
     ): Promise<core.WithRawResponse<FlaqzApp.GetAllCustomersResponse>> {
-        const { page, pageSize } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.page = page.toString();
-        _queryParams.pageSize = pageSize.toString();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
@@ -57,7 +47,7 @@ export class CustomerClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

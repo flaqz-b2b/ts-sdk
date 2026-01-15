@@ -3,17 +3,17 @@
 import type * as FlaqzApp from "../../../../api/index.js";
 import * as core from "../../../../core/index.js";
 import type * as serializers from "../../../index.js";
-import { GetVoicesResponseOthersData } from "./GetVoicesResponseOthersData.js";
+import { Voice } from "../../../types/Voice.js";
 
 export const GetVoicesResponseOthers: core.serialization.ObjectSchema<
     serializers.GetVoicesResponseOthers.Raw,
     FlaqzApp.GetVoicesResponseOthers
 > = core.serialization.object({
-    data: GetVoicesResponseOthersData.optional(),
+    data: core.serialization.list(Voice).optional(),
 });
 
 export declare namespace GetVoicesResponseOthers {
     export interface Raw {
-        data?: GetVoicesResponseOthersData.Raw | null;
+        data?: Voice.Raw[] | null;
     }
 }

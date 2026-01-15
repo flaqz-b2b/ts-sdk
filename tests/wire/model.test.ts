@@ -4,6 +4,49 @@ import { FlaqzAppClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ModelClient", () => {
+    test("getModels", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: [
+                    {
+                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                        model: "llama-3.1-8b-instant",
+                        provider: "groq",
+                        maxTokens: 128,
+                        temperature: 0.6,
+                        createdAt: "2000-01-01T00:00:00Z",
+                    },
+                ],
+            },
+        };
+        server.mockEndpoint().get("/api/v1/models").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.model.getModels();
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: [
+                    {
+                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                        model: "llama-3.1-8b-instant",
+                        provider: "groq",
+                        maxTokens: 128,
+                        temperature: 0.6,
+                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                    },
+                ],
+            },
+        });
+    });
+
     test("createModel", async () => {
         const server = mockServerPool.createServer();
         const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });

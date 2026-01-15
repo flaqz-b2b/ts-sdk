@@ -2,7 +2,6 @@
 
 import type * as FlaqzApp from "../../../index.js";
 
-export interface GetAssistantsResponseOthersData {
-    data: FlaqzApp.Assistant[];
-    total: number;
+export interface GetModelsResponseOthers {
+    data?: FlaqzApp.Model[];
 }
