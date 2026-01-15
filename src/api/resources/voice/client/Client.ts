@@ -23,30 +23,20 @@ export class VoiceClient {
     }
 
     /**
-     * @param {FlaqzApp.GetVoicesRequest} request
      * @param {VoiceClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.voice.getVoices({
-     *         page: 1,
-     *         pageSize: 20
-     *     })
+     *     await client.voice.getVoices()
      */
     public getVoices(
-        request: FlaqzApp.GetVoicesRequest,
         requestOptions?: VoiceClient.RequestOptions,
     ): core.HttpResponsePromise<FlaqzApp.GetVoicesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getVoices(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getVoices(requestOptions));
     }
 
     private async __getVoices(
-        request: FlaqzApp.GetVoicesRequest,
         requestOptions?: VoiceClient.RequestOptions,
     ): Promise<core.WithRawResponse<FlaqzApp.GetVoicesResponse>> {
-        const { page, pageSize } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.page = page.toString();
-        _queryParams.pageSize = pageSize.toString();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
@@ -57,7 +47,7 @@ export class VoiceClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

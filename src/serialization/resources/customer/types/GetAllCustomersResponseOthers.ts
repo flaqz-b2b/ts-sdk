@@ -3,17 +3,17 @@
 import type * as FlaqzApp from "../../../../api/index.js";
 import * as core from "../../../../core/index.js";
 import type * as serializers from "../../../index.js";
-import { GetAllCustomersResponseOthersData } from "./GetAllCustomersResponseOthersData.js";
+import { Customer } from "../../../types/Customer.js";
 
 export const GetAllCustomersResponseOthers: core.serialization.ObjectSchema<
     serializers.GetAllCustomersResponseOthers.Raw,
     FlaqzApp.GetAllCustomersResponseOthers
 > = core.serialization.object({
-    data: GetAllCustomersResponseOthersData.optional(),
+    data: core.serialization.list(Customer).optional(),
 });
 
 export declare namespace GetAllCustomersResponseOthers {
     export interface Raw {
-        data?: GetAllCustomersResponseOthersData.Raw | null;
+        data?: Customer.Raw[] | null;
     }
 }

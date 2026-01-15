@@ -3,5 +3,5 @@
 import type * as FlaqzApp from "../../../index.js";
 
 export interface GetAssistantsResponseOthers {
-    data?: FlaqzApp.GetAssistantsResponseOthersData;
+    data?: FlaqzApp.Assistant[];
 }

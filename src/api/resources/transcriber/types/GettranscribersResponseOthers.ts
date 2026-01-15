@@ -3,5 +3,5 @@
 import type * as FlaqzApp from "../../../index.js";
 
 export interface GettranscribersResponseOthers {
-    data?: FlaqzApp.GettranscribersResponseOthersData;
+    data?: FlaqzApp.Transcriber[];
 }

@@ -13,18 +13,15 @@ describe("TranscriberClient", () => {
             success: true,
             message: "message",
             others: {
-                data: {
-                    data: [
-                        {
-                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                            model: "nova-2",
-                            language: "pt-BR",
-                            provider: "deepgram",
-                            createdAt: "2000-01-01T00:00:00Z",
-                        },
-                    ],
-                    total: 1,
-                },
+                data: [
+                    {
+                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                        model: "nova-2",
+                        language: "pt-BR",
+                        provider: "deepgram",
+                        createdAt: "2000-01-01T00:00:00Z",
+                    },
+                ],
             },
         };
         server
@@ -35,27 +32,21 @@ describe("TranscriberClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.transcriber.gettranscribers({
-            page: 1,
-            pageSize: 20,
-        });
+        const response = await client.transcriber.gettranscribers();
         expect(response).toEqual({
             status: 1,
             success: true,
             message: "message",
             others: {
-                data: {
-                    data: [
-                        {
-                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                            model: "nova-2",
-                            language: "pt-BR",
-                            provider: "deepgram",
-                            createdAt: new Date("2000-01-01T00:00:00.000Z"),
-                        },
-                    ],
-                    total: 1,
-                },
+                data: [
+                    {
+                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                        model: "nova-2",
+                        language: "pt-BR",
+                        provider: "deepgram",
+                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                    },
+                ],
             },
         });
     });

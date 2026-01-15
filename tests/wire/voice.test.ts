@@ -13,55 +13,46 @@ describe("VoiceClient", () => {
             success: true,
             message: "message",
             others: {
-                data: {
-                    data: [
-                        {
-                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                            provider: "11labs",
-                            model: "eleven_flash_v2",
-                            voiceId: "33B4UnXyTNbgLmdEDh5P",
-                            autoMode: true,
-                            speed: 1,
-                            style: 0,
-                            stability: 0.5,
-                            similarity: 0.5,
-                            optimize: 2,
-                            createdAt: "2000-01-01T00:00:00Z",
-                        },
-                    ],
-                    total: 1,
-                },
+                data: [
+                    {
+                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                        provider: "11labs",
+                        model: "eleven_flash_v2",
+                        voiceId: "33B4UnXyTNbgLmdEDh5P",
+                        autoMode: true,
+                        speed: 1,
+                        style: 0,
+                        stability: 0.5,
+                        similarity: 0.5,
+                        optimize: 2,
+                        createdAt: "2000-01-01T00:00:00Z",
+                    },
+                ],
             },
         };
         server.mockEndpoint().get("/api/v1/voices").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.voice.getVoices({
-            page: 1,
-            pageSize: 20,
-        });
+        const response = await client.voice.getVoices();
         expect(response).toEqual({
             status: 1,
             success: true,
             message: "message",
             others: {
-                data: {
-                    data: [
-                        {
-                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                            provider: "11labs",
-                            model: "eleven_flash_v2",
-                            voiceId: "33B4UnXyTNbgLmdEDh5P",
-                            autoMode: true,
-                            speed: 1,
-                            style: 0,
-                            stability: 0.5,
-                            similarity: 0.5,
-                            optimize: 2,
-                            createdAt: new Date("2000-01-01T00:00:00.000Z"),
-                        },
-                    ],
-                    total: 1,
-                },
+                data: [
+                    {
+                        id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                        provider: "11labs",
+                        model: "eleven_flash_v2",
+                        voiceId: "33B4UnXyTNbgLmdEDh5P",
+                        autoMode: true,
+                        speed: 1,
+                        style: 0,
+                        stability: 0.5,
+                        similarity: 0.5,
+                        optimize: 2,
+                        createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                    },
+                ],
             },
         });
     });

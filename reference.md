@@ -1,6 +1,6 @@
 # Reference
 ## Customer
-<details><summary><code>client.customer.<a href="/src/api/resources/customer/client/Client.ts">getAllCustomers</a>({ ...params }) -> FlaqzApp.GetAllCustomersResponse</code></summary>
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client/Client.ts">getAllCustomers</a>() -> FlaqzApp.GetAllCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -13,10 +13,7 @@
 <dd>
 
 ```typescript
-await client.customer.getAllCustomers({
-    page: 1,
-    pageSize: 20
-});
+await client.customer.getAllCustomers();
 
 ```
 </dd>
@@ -28,14 +25,6 @@ await client.customer.getAllCustomers({
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request:** `FlaqzApp.GetAllCustomersRequest` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -162,7 +151,7 @@ await client.customer.searchCustomers({
 </details>
 
 ## Assistant
-<details><summary><code>client.assistant.<a href="/src/api/resources/assistant/client/Client.ts">getAssistants</a>({ ...params }) -> FlaqzApp.GetAssistantsResponse</code></summary>
+<details><summary><code>client.assistant.<a href="/src/api/resources/assistant/client/Client.ts">getAssistants</a>() -> FlaqzApp.GetAssistantsResponse</code></summary>
 <dl>
 <dd>
 
@@ -175,10 +164,7 @@ await client.customer.searchCustomers({
 <dd>
 
 ```typescript
-await client.assistant.getAssistants({
-    page: 1,
-    pageSize: 20
-});
+await client.assistant.getAssistants();
 
 ```
 </dd>
@@ -190,14 +176,6 @@ await client.assistant.getAssistants({
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request:** `FlaqzApp.GetAssistantsRequest` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -395,6 +373,47 @@ await client.assistant.searchAssistants({
 </details>
 
 ## Model
+<details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">getModels</a>() -> FlaqzApp.GetModelsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.model.getModels();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">createModel</a>({ ...params }) -> FlaqzApp.CreateModelResponse</code></summary>
 <dl>
 <dd>
@@ -503,7 +522,7 @@ await client.model.searchModels({
 </details>
 
 ## Transcriber
-<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">gettranscribers</a>({ ...params }) -> FlaqzApp.GettranscribersResponse</code></summary>
+<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">gettranscribers</a>() -> FlaqzApp.GettranscribersResponse</code></summary>
 <dl>
 <dd>
 
@@ -516,10 +535,7 @@ await client.model.searchModels({
 <dd>
 
 ```typescript
-await client.transcriber.gettranscribers({
-    page: 1,
-    pageSize: 20
-});
+await client.transcriber.gettranscribers();
 
 ```
 </dd>
@@ -531,14 +547,6 @@ await client.transcriber.gettranscribers({
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request:** `FlaqzApp.GettranscribersRequest` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -662,7 +670,7 @@ await client.transcriber.searchTranscribers({
 </details>
 
 ## Voice
-<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">getVoices</a>({ ...params }) -> FlaqzApp.GetVoicesResponse</code></summary>
+<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">getVoices</a>() -> FlaqzApp.GetVoicesResponse</code></summary>
 <dl>
 <dd>
 
@@ -675,10 +683,7 @@ await client.transcriber.searchTranscribers({
 <dd>
 
 ```typescript
-await client.voice.getVoices({
-    page: 1,
-    pageSize: 20
-});
+await client.voice.getVoices();
 
 ```
 </dd>
@@ -690,14 +695,6 @@ await client.voice.getVoices({
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**request:** `FlaqzApp.GetVoicesRequest` 
-    
-</dd>
-</dl>
 
 <dl>
 <dd>

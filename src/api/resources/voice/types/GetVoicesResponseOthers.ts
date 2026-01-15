@@ -3,5 +3,5 @@
 import type * as FlaqzApp from "../../../index.js";
 
 export interface GetVoicesResponseOthers {
-    data?: FlaqzApp.GetVoicesResponseOthersData;
+    data?: FlaqzApp.Voice[];
 }

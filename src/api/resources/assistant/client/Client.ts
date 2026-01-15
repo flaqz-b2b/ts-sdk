@@ -23,30 +23,20 @@ export class AssistantClient {
     }
 
     /**
-     * @param {FlaqzApp.GetAssistantsRequest} request
      * @param {AssistantClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.assistant.getAssistants({
-     *         page: 1,
-     *         pageSize: 20
-     *     })
+     *     await client.assistant.getAssistants()
      */
     public getAssistants(
-        request: FlaqzApp.GetAssistantsRequest,
         requestOptions?: AssistantClient.RequestOptions,
     ): core.HttpResponsePromise<FlaqzApp.GetAssistantsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getAssistants(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getAssistants(requestOptions));
     }
 
     private async __getAssistants(
-        request: FlaqzApp.GetAssistantsRequest,
         requestOptions?: AssistantClient.RequestOptions,
     ): Promise<core.WithRawResponse<FlaqzApp.GetAssistantsResponse>> {
-        const { page, pageSize } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.page = page.toString();
-        _queryParams.pageSize = pageSize.toString();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
@@ -57,7 +47,7 @@ export class AssistantClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
