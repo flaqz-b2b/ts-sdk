@@ -1,6 +1,11 @@
 export * from "./assistant/client/requests/index.js";
 export * as assistant from "./assistant/index.js";
 export * from "./assistant/types/index.js";
+export * from "./campaign/client/requests/index.js";
+export * as campaign from "./campaign/index.js";
+export * from "./campaign/types/index.js";
+export * as campaigns from "./campaigns/index.js";
+export * from "./campaigns/types/index.js";
 export * from "./customer/client/requests/index.js";
 export * as customer from "./customer/index.js";
 export * from "./customer/types/index.js";

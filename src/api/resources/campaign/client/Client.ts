@@ -9,134 +9,69 @@ import * as errors from "../../../../errors/index.js";
 import * as serializers from "../../../../serialization/index.js";
 import type * as FlaqzApp from "../../../index.js";
 
-export declare namespace AssistantClient {
+export declare namespace CampaignClient {
     export interface Options extends BaseClientOptions {}
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-export class AssistantClient {
-    protected readonly _options: AssistantClient.Options;
+export class CampaignClient {
+    protected readonly _options: CampaignClient.Options;
 
-    constructor(options: AssistantClient.Options = {}) {
+    constructor(options: CampaignClient.Options = {}) {
         this._options = normalizeClientOptions(options);
     }
 
     /**
-     * @param {AssistantClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {FlaqzApp.CreateCampaignInput} request
+     * @param {CampaignClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.assistant.getAssistants()
-     */
-    public getAssistants(
-        requestOptions?: AssistantClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.GetAssistantsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getAssistants(requestOptions));
-    }
-
-    private async __getAssistants(
-        requestOptions?: AssistantClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.GetAssistantsResponse>> {
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.FlaqzAppEnvironment.Default,
-                "api/v1/assistants",
-            ),
-            method: "GET",
-            headers: _headers,
-            queryParameters: requestOptions?.queryParams,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: serializers.GetAssistantsResponse.parseOrThrow(_response.body, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    skipValidation: true,
-                    breadcrumbsPrefix: ["response"],
-                }),
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.FlaqzAppError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.FlaqzAppError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/assistants.");
-            case "unknown":
-                throw new errors.FlaqzAppError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
-    }
-
-    /**
-     * @param {FlaqzApp.CreateAssistantInput} request
-     * @param {AssistantClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.assistant.createAssistant({
-     *         name: "My Assistant 01",
-     *         voiceId: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
-     *         modelId: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
-     *         transcriberId: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
-     *         prompt: "You're a assistant that call to people and ask if they know how to make a carrot cake",
-     *         firstMsg: "Hello!",
-     *         firstMsgMode: "SPEAKS_FIRST",
-     *         voiceMailMsg: "Who uses voicemail in 2077 man",
-     *         endMsg: "Bye!",
-     *         bgSound: "OFFICE",
-     *         bgDenoising: true,
-     *         structuredOutputIds: ["SALE_COMPLETED", "LEAD_STATUS"]
+     *     await client.campaign.createCampaign({
+     *         assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
+     *         customers: [{
+     *                 id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
+     *                 email: "awesome@customer.com",
+     *                 fullName: "Awesome Customer",
+     *                 phoneNumber: "+10000000000",
+     *                 ppInfo: "Under financial history analysis",
+     *                 createdAt: new Date("2000-01-01T00:00:00.000Z")
+     *             }, {
+     *                 id: "df727d0e-a169-4e27-8b5e-637077d57f35",
+     *                 email: "boring@customer.com",
+     *                 fullName: "Boring Customer",
+     *                 phoneNumber: "+10000000000",
+     *                 ppInfo: "Under financial history analysis",
+     *                 createdAt: new Date("2000-01-01T00:00:00.000Z")
+     *             }],
+     *         published: true
      *     })
      */
-    public createAssistant(
-        request: FlaqzApp.CreateAssistantInput,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.CreateAssistantResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__createAssistant(request, requestOptions));
+    public createCampaign(
+        request: FlaqzApp.CreateCampaignInput,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.CreateCampaignResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createCampaign(request, requestOptions));
     }
 
-    private async __createAssistant(
-        request: FlaqzApp.CreateAssistantInput,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.CreateAssistantResponse>> {
+    private async __createCampaign(
+        request: FlaqzApp.CreateCampaignInput,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.CreateCampaignResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FlaqzAppEnvironment.Default,
-                "api/v1/assistants",
+                "api/v1/campaigns",
             ),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
-            body: serializers.CreateAssistantInput.jsonOrThrow(request, {
+            body: serializers.CreateCampaignInput.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
                 omitUndefined: true,
             }),
@@ -148,7 +83,7 @@ export class AssistantClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.CreateAssistantResponse.parseOrThrow(_response.body, {
+                data: serializers.CreateCampaignResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -175,7 +110,7 @@ export class AssistantClient {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling POST /api/v1/assistants.");
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling POST /api/v1/campaigns.");
             case "unknown":
                 throw new errors.FlaqzAppError({
                     message: _response.error.errorMessage,
@@ -185,39 +120,44 @@ export class AssistantClient {
     }
 
     /**
-     * @param {FlaqzApp.UpdateAssistant} request
-     * @param {AssistantClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {FlaqzApp.UpdateCampaignRequest} request
+     * @param {CampaignClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.assistant.updateAssistant({
+     *     await client.campaign.updateCampaign({
      *         id: "id",
      *         newData: {
-     *             name: "My Assistant 01",
-     *             voiceId: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
-     *             modelId: "a4ac4276-9c26-4bb0-a563-a290f2b4c91f",
-     *             transcriberId: "66fa9d6b-c6ac-4baf-ade4-37e16478e4b2",
-     *             prompt: "You're a assistant that call to people and ask if they know how to make a carrot cake",
-     *             firstMsg: "Hello!",
-     *             firstMsgMode: "SPEAKS_FIRST",
-     *             voiceMailMsg: "Who uses voicemail in 2077 man",
-     *             endMsg: "Bye!",
-     *             bgSound: "OFFICE",
-     *             bgDenoising: true,
-     *             structuredOutputIds: ["SALE_COMPLETED", "LEAD_STATUS"]
+     *             assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
+     *             customers: [{
+     *                     id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
+     *                     email: "awesome@customer.com",
+     *                     fullName: "Awesome Customer",
+     *                     phoneNumber: "+10000000000",
+     *                     ppInfo: "Under financial history analysis",
+     *                     createdAt: new Date("2000-01-01T00:00:00.000Z")
+     *                 }, {
+     *                     id: "df727d0e-a169-4e27-8b5e-637077d57f35",
+     *                     email: "boring@customer.com",
+     *                     fullName: "Boring Customer",
+     *                     phoneNumber: "+10000000000",
+     *                     ppInfo: "Under financial history analysis",
+     *                     createdAt: new Date("2000-01-01T00:00:00.000Z")
+     *                 }],
+     *             published: true
      *         }
      *     })
      */
-    public updateAssistant(
-        request: FlaqzApp.UpdateAssistant,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.UpdateAssistantResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__updateAssistant(request, requestOptions));
+    public updateCampaign(
+        request: FlaqzApp.UpdateCampaignRequest,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.UpdateCampaignResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateCampaign(request, requestOptions));
     }
 
-    private async __updateAssistant(
-        request: FlaqzApp.UpdateAssistant,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.UpdateAssistantResponse>> {
+    private async __updateCampaign(
+        request: FlaqzApp.UpdateCampaignRequest,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.UpdateCampaignResponse>> {
         const { id, ..._body } = request;
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
@@ -225,14 +165,14 @@ export class AssistantClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FlaqzAppEnvironment.Default,
-                `api/v1/assistants/${core.url.encodePathParam(id)}`,
+                `api/v1/campaigns/${core.url.encodePathParam(id)}`,
             ),
             method: "PUT",
             headers: _headers,
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
-            body: serializers.UpdateAssistant.jsonOrThrow(_body, {
+            body: serializers.UpdateCampaignRequest.jsonOrThrow(_body, {
                 unrecognizedObjectKeys: "strip",
                 omitUndefined: true,
             }),
@@ -244,7 +184,7 @@ export class AssistantClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.UpdateAssistantResponse.parseOrThrow(_response.body, {
+                data: serializers.UpdateCampaignResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -271,7 +211,7 @@ export class AssistantClient {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling PUT /api/v1/assistants/{id}.");
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling PUT /api/v1/campaigns/{id}.");
             case "unknown":
                 throw new errors.FlaqzAppError({
                     message: _response.error.errorMessage,
@@ -281,43 +221,37 @@ export class AssistantClient {
     }
 
     /**
-     * @param {FlaqzApp.SearchAssistantsRequest} request
-     * @param {AssistantClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {FlaqzApp.DeleteCampaignRequest} request
+     * @param {CampaignClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.assistant.searchAssistants({
-     *         page: 1,
-     *         pageSize: 20,
-     *         query: "Awesome Customer"
+     *     await client.campaign.deleteCampaign({
+     *         id: "df727d0e-a169-4e24-8b5e-637077d57f35"
      *     })
      */
-    public searchAssistants(
-        request: FlaqzApp.SearchAssistantsRequest,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.SearchAssistantsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__searchAssistants(request, requestOptions));
+    public deleteCampaign(
+        request: FlaqzApp.DeleteCampaignRequest,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.DeleteCampaignResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteCampaign(request, requestOptions));
     }
 
-    private async __searchAssistants(
-        request: FlaqzApp.SearchAssistantsRequest,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.SearchAssistantsResponse>> {
-        const { page, pageSize, query } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.page = page.toString();
-        _queryParams.pageSize = pageSize.toString();
-        _queryParams.query = query;
+    private async __deleteCampaign(
+        request: FlaqzApp.DeleteCampaignRequest,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.DeleteCampaignResponse>> {
+        const { id } = request;
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FlaqzAppEnvironment.Default,
-                "api/v1/assistants/search",
+                `api/v1/campaigns/${core.url.encodePathParam(id)}`,
             ),
-            method: "GET",
+            method: "DELETE",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -326,7 +260,7 @@ export class AssistantClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.SearchAssistantsResponse.parseOrThrow(_response.body, {
+                data: serializers.DeleteCampaignResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -353,7 +287,7 @@ export class AssistantClient {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/assistants/search.");
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling DELETE /api/v1/campaigns/{id}.");
             case "unknown":
                 throw new errors.FlaqzAppError({
                     message: _response.error.errorMessage,
@@ -363,43 +297,37 @@ export class AssistantClient {
     }
 
     /**
-     * @param {FlaqzApp.SearchCampaignsRequest} request
-     * @param {AssistantClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {FlaqzApp.PublishCampaignRequest} request
+     * @param {CampaignClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.assistant.searchCampaigns({
-     *         page: 1,
-     *         pageSize: 20,
-     *         query: "Wow a amazing campaign"
+     *     await client.campaign.publishCampaign({
+     *         id: "id"
      *     })
      */
-    public searchCampaigns(
-        request: FlaqzApp.SearchCampaignsRequest,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.SearchCampaignsResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__searchCampaigns(request, requestOptions));
+    public publishCampaign(
+        request: FlaqzApp.PublishCampaignRequest,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.PublishCampaignResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__publishCampaign(request, requestOptions));
     }
 
-    private async __searchCampaigns(
-        request: FlaqzApp.SearchCampaignsRequest,
-        requestOptions?: AssistantClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.SearchCampaignsResponse>> {
-        const { page, pageSize, query } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        _queryParams.page = page.toString();
-        _queryParams.pageSize = pageSize.toString();
-        _queryParams.query = query;
+    private async __publishCampaign(
+        request: FlaqzApp.PublishCampaignRequest,
+        requestOptions?: CampaignClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.PublishCampaignResponse>> {
+        const { id } = request;
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FlaqzAppEnvironment.Default,
-                "api/v1/campaigns/search",
+                `api/v1/campaigns/${core.url.encodePathParam(id)}/publish`,
             ),
-            method: "GET",
+            method: "POST",
             headers: _headers,
-            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -408,7 +336,7 @@ export class AssistantClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.SearchCampaignsResponse.parseOrThrow(_response.body, {
+                data: serializers.PublishCampaignResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -435,7 +363,9 @@ export class AssistantClient {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/campaigns/search.");
+                throw new errors.FlaqzAppTimeoutError(
+                    "Timeout exceeded when calling POST /api/v1/campaigns/{id}/publish.",
+                );
             case "unknown":
                 throw new errors.FlaqzAppError({
                     message: _response.error.errorMessage,

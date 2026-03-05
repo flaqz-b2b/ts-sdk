@@ -550,4 +550,95 @@ describe("AssistantClient", () => {
             },
         });
     });
+
+    test("searchCampaigns", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
+                            customers: [
+                                {
+                                    id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
+                                    email: "awesome@customer.com",
+                                    fullName: "Awesome Customer",
+                                    phoneNumber: "+10000000000",
+                                    ppInfo: "Under financial history analysis",
+                                    createdAt: "2000-01-01T00:00:00Z",
+                                },
+                                {
+                                    id: "df727d0e-a169-4e27-8b5e-637077d57f35",
+                                    email: "boring@customer.com",
+                                    fullName: "Boring Customer",
+                                    phoneNumber: "+10000000000",
+                                    ppInfo: "Under financial history analysis",
+                                    createdAt: "2000-01-01T00:00:00Z",
+                                },
+                            ],
+                            published: true,
+                            createdAt: "2000-01-01T00:00:00Z",
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .get("/api/v1/campaigns/search")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.assistant.searchCampaigns({
+            page: 1,
+            pageSize: 20,
+            query: "Wow a amazing campaign",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    data: [
+                        {
+                            id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
+                            customers: [
+                                {
+                                    id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
+                                    email: "awesome@customer.com",
+                                    fullName: "Awesome Customer",
+                                    phoneNumber: "+10000000000",
+                                    ppInfo: "Under financial history analysis",
+                                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                                },
+                                {
+                                    id: "df727d0e-a169-4e27-8b5e-637077d57f35",
+                                    email: "boring@customer.com",
+                                    fullName: "Boring Customer",
+                                    phoneNumber: "+10000000000",
+                                    ppInfo: "Under financial history analysis",
+                                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                                },
+                            ],
+                            published: true,
+                            createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                        },
+                    ],
+                    total: 1,
+                },
+            },
+        });
+    });
 });
