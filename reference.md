@@ -372,6 +372,59 @@ await client.assistant.searchAssistants({
 </dl>
 </details>
 
+<details><summary><code>client.assistant.<a href="/src/api/resources/assistant/client/Client.ts">searchCampaigns</a>({ ...params }) -> FlaqzApp.SearchCampaignsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assistant.searchCampaigns({
+    page: 1,
+    pageSize: 20,
+    query: "Wow a amazing campaign"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SearchCampaignsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssistantClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Model
 <details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">getModels</a>() -> FlaqzApp.GetModelsResponse</code></summary>
 <dl>
@@ -812,6 +865,288 @@ await client.voice.searchVoices({
 <dd>
 
 **requestOptions:** `VoiceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Campaigns
+<details><summary><code>client.campaigns.<a href="/src/api/resources/campaigns/client/Client.ts">getCampaigns</a>() -> FlaqzApp.GetCampaignsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.campaigns.getCampaigns();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `CampaignsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Campaign
+<details><summary><code>client.campaign.<a href="/src/api/resources/campaign/client/Client.ts">createCampaign</a>({ ...params }) -> FlaqzApp.CreateCampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.campaign.createCampaign({
+    assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
+    customers: [{
+            id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
+            email: "awesome@customer.com",
+            fullName: "Awesome Customer",
+            phoneNumber: "+10000000000",
+            ppInfo: "Under financial history analysis",
+            createdAt: new Date("2000-01-01T00:00:00.000Z")
+        }, {
+            id: "df727d0e-a169-4e27-8b5e-637077d57f35",
+            email: "boring@customer.com",
+            fullName: "Boring Customer",
+            phoneNumber: "+10000000000",
+            ppInfo: "Under financial history analysis",
+            createdAt: new Date("2000-01-01T00:00:00.000Z")
+        }],
+    published: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.CreateCampaignInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CampaignClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.campaign.<a href="/src/api/resources/campaign/client/Client.ts">updateCampaign</a>({ ...params }) -> FlaqzApp.UpdateCampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.campaign.updateCampaign({
+    id: "id",
+    newData: {
+        assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
+        customers: [{
+                id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
+                email: "awesome@customer.com",
+                fullName: "Awesome Customer",
+                phoneNumber: "+10000000000",
+                ppInfo: "Under financial history analysis",
+                createdAt: new Date("2000-01-01T00:00:00.000Z")
+            }, {
+                id: "df727d0e-a169-4e27-8b5e-637077d57f35",
+                email: "boring@customer.com",
+                fullName: "Boring Customer",
+                phoneNumber: "+10000000000",
+                ppInfo: "Under financial history analysis",
+                createdAt: new Date("2000-01-01T00:00:00.000Z")
+            }],
+        published: true
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.UpdateCampaignRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CampaignClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.campaign.<a href="/src/api/resources/campaign/client/Client.ts">deleteCampaign</a>({ ...params }) -> FlaqzApp.DeleteCampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.campaign.deleteCampaign({
+    id: "df727d0e-a169-4e24-8b5e-637077d57f35"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.DeleteCampaignRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CampaignClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.campaign.<a href="/src/api/resources/campaign/client/Client.ts">publishCampaign</a>({ ...params }) -> FlaqzApp.PublishCampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.campaign.publishCampaign({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.PublishCampaignRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CampaignClient.RequestOptions` 
     
 </dd>
 </dl>

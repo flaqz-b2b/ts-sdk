@@ -5,5 +5,8 @@ export * from "./GetAssistantsResponseOthers.js";
 export * from "./SearchAssistantsResponse.js";
 export * from "./SearchAssistantsResponseOthers.js";
 export * from "./SearchAssistantsResponseOthersData.js";
+export * from "./SearchCampaignsResponse.js";
+export * from "./SearchCampaignsResponseOthers.js";
+export * from "./SearchCampaignsResponseOthersData.js";
 export * from "./UpdateAssistantResponse.js";
 export * from "./UpdateAssistantResponseOthers.js";
