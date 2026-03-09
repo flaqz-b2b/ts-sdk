@@ -986,21 +986,7 @@ await client.campaigns.runCampaign({
 await client.campaign.createCampaign({
     campaignName: "My Awesome Campaign",
     assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
-    customers: [{
-            id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
-            email: "awesome@customer.com",
-            fullName: "Awesome Customer",
-            phoneNumber: "+10000000000",
-            ppInfo: "Under financial history analysis",
-            createdAt: new Date("2000-01-01T00:00:00.000Z")
-        }, {
-            id: "df727d0e-a169-4e27-8b5e-637077d57f35",
-            email: "boring@customer.com",
-            fullName: "Boring Customer",
-            phoneNumber: "+10000000000",
-            ppInfo: "Under financial history analysis",
-            createdAt: new Date("2000-01-01T00:00:00.000Z")
-        }],
+    customerIds: ["8f727d7e-a169-4e24-8b5e-637077d57f35", "df727d0e-a169-4e27-8b5e-637077d57f35"],
     published: true
 });
 
@@ -1056,21 +1042,7 @@ await client.campaign.updateCampaign({
     newData: {
         campaignName: "My Awesome Campaign",
         assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
-        customers: [{
-                id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
-                email: "awesome@customer.com",
-                fullName: "Awesome Customer",
-                phoneNumber: "+10000000000",
-                ppInfo: "Under financial history analysis",
-                createdAt: new Date("2000-01-01T00:00:00.000Z")
-            }, {
-                id: "df727d0e-a169-4e27-8b5e-637077d57f35",
-                email: "boring@customer.com",
-                fullName: "Boring Customer",
-                phoneNumber: "+10000000000",
-                ppInfo: "Under financial history analysis",
-                createdAt: new Date("2000-01-01T00:00:00.000Z")
-            }],
+        customerIds: ["8f727d7e-a169-4e24-8b5e-637077d57f35", "df727d0e-a169-4e27-8b5e-637077d57f35"],
         published: true
     }
 });

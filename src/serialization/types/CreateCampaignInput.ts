@@ -3,7 +3,6 @@
 import type * as FlaqzApp from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { Customer } from "./Customer.js";
 
 export const CreateCampaignInput: core.serialization.ObjectSchema<
     serializers.CreateCampaignInput.Raw,
@@ -11,7 +10,7 @@ export const CreateCampaignInput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     campaignName: core.serialization.string(),
     assistantId: core.serialization.string(),
-    customers: core.serialization.list(Customer),
+    customerIds: core.serialization.list(core.serialization.string()),
     published: core.serialization.boolean(),
 });
 
@@ -19,7 +18,7 @@ export declare namespace CreateCampaignInput {
     export interface Raw {
         campaignName: string;
         assistantId: string;
-        customers: Customer.Raw[];
+        customerIds: string[];
         published: boolean;
     }
 }
