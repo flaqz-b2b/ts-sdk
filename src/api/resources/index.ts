@@ -4,7 +4,6 @@ export * from "./assistant/types/index.js";
 export * from "./campaign/client/requests/index.js";
 export * as campaign from "./campaign/index.js";
 export * from "./campaign/types/index.js";
-export * from "./campaigns/client/requests/index.js";
 export * as campaigns from "./campaigns/index.js";
 export * from "./campaigns/types/index.js";
 export * from "./customer/client/requests/index.js";
