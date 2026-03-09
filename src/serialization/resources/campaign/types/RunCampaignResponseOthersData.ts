@@ -7,8 +7,12 @@ import type * as serializers from "../../../index.js";
 export const RunCampaignResponseOthersData: core.serialization.ObjectSchema<
     serializers.RunCampaignResponseOthersData.Raw,
     FlaqzApp.RunCampaignResponseOthersData
-> = core.serialization.object({});
+> = core.serialization.object({
+    vapiCampaignId: core.serialization.string(),
+});
 
 export declare namespace RunCampaignResponseOthersData {
-    export type Raw = {};
+    export interface Raw {
+        vapiCampaignId: string;
+    }
 }
