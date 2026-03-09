@@ -12,6 +12,7 @@ export * from "./CreateCustomerInput.js";
 export * from "./Customer.js";
 export * from "./DeleteCampaign.js";
 export * from "./Model.js";
+export * from "./RunCampaign.js";
 export * from "./SearchAssistant.js";
 export * from "./SearchCampaign.js";
 export * from "./SearchCustomer.js";
