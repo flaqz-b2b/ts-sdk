@@ -300,7 +300,12 @@ describe("CampaignClient", () => {
         const server = mockServerPool.createServer();
         const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
 
-        const rawResponseBody = { status: 1, success: true, message: "message", others: {} };
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: { data: { vapiCampaignId: "vapiCampaignId" } },
+        };
         server
             .mockEndpoint()
             .post("/api/v1/campaigns/df727d0e-a169-4e24-8b5e-637077d57f35/run")
@@ -316,7 +321,11 @@ describe("CampaignClient", () => {
             status: 1,
             success: true,
             message: "message",
-            others: {},
+            others: {
+                data: {
+                    vapiCampaignId: "vapiCampaignId",
+                },
+            },
         });
     });
 });
