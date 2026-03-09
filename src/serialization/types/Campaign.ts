@@ -8,6 +8,7 @@ import { Customer } from "./Customer.js";
 export const Campaign: core.serialization.ObjectSchema<serializers.Campaign.Raw, FlaqzApp.Campaign> =
     core.serialization.object({
         id: core.serialization.string(),
+        campaignName: core.serialization.string(),
         assistantId: core.serialization.string(),
         customers: core.serialization.list(Customer),
         published: core.serialization.boolean(),
@@ -17,6 +18,7 @@ export const Campaign: core.serialization.ObjectSchema<serializers.Campaign.Raw,
 export declare namespace Campaign {
     export interface Raw {
         id: string;
+        campaignName: string;
         assistantId: string;
         customers: Customer.Raw[];
         published: boolean;

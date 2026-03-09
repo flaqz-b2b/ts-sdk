@@ -8,6 +8,7 @@ describe("CampaignClient", () => {
         const server = mockServerPool.createServer();
         const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
         const rawRequestBody = {
+            campaignName: "My Awesome Campaign",
             assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
             customers: [
                 {
@@ -36,6 +37,7 @@ describe("CampaignClient", () => {
             others: {
                 data: {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    campaignName: "My Awesome Campaign",
                     assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                     customers: [
                         {
@@ -70,6 +72,7 @@ describe("CampaignClient", () => {
             .build();
 
         const response = await client.campaign.createCampaign({
+            campaignName: "My Awesome Campaign",
             assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
             customers: [
                 {
@@ -98,6 +101,7 @@ describe("CampaignClient", () => {
             others: {
                 data: {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    campaignName: "My Awesome Campaign",
                     assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                     customers: [
                         {
@@ -129,6 +133,7 @@ describe("CampaignClient", () => {
         const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
         const rawRequestBody = {
             newData: {
+                campaignName: "My Awesome Campaign",
                 assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                 customers: [
                     {
@@ -158,6 +163,7 @@ describe("CampaignClient", () => {
             others: {
                 data: {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    campaignName: "My Awesome Campaign",
                     assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                     customers: [
                         {
@@ -194,6 +200,7 @@ describe("CampaignClient", () => {
         const response = await client.campaign.updateCampaign({
             id: "id",
             newData: {
+                campaignName: "My Awesome Campaign",
                 assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                 customers: [
                     {
@@ -223,6 +230,7 @@ describe("CampaignClient", () => {
             others: {
                 data: {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    campaignName: "My Awesome Campaign",
                     assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                     customers: [
                         {
@@ -286,6 +294,7 @@ describe("CampaignClient", () => {
             others: {
                 data: {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    campaignName: "My Awesome Campaign",
                     assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                     customers: [
                         {
@@ -328,6 +337,7 @@ describe("CampaignClient", () => {
             others: {
                 data: {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    campaignName: "My Awesome Campaign",
                     assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                     customers: [
                         {

@@ -564,6 +564,7 @@ describe("AssistantClient", () => {
                     data: [
                         {
                             id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            campaignName: "My Awesome Campaign",
                             assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                             customers: [
                                 {
@@ -613,6 +614,7 @@ describe("AssistantClient", () => {
                     data: [
                         {
                             id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                            campaignName: "My Awesome Campaign",
                             assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
                             customers: [
                                 {
