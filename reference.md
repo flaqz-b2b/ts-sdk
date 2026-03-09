@@ -918,57 +918,6 @@ await client.campaigns.getCampaigns();
 </dl>
 </details>
 
-<details><summary><code>client.campaigns.<a href="/src/api/resources/campaigns/client/Client.ts">runCampaign</a>({ ...params }) -> FlaqzApp.RunCampaignResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.campaigns.runCampaign({
-    id: "df727d0e-a169-4e24-8b5e-637077d57f35"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `FlaqzApp.RunCampaignRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CampaignsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Campaign
 <details><summary><code>client.campaign.<a href="/src/api/resources/campaign/client/Client.ts">createCampaign</a>({ ...params }) -> FlaqzApp.CreateCampaignResponse</code></summary>
 <dl>
@@ -1164,6 +1113,57 @@ await client.campaign.publishCampaign({
 <dd>
 
 **request:** `FlaqzApp.PublishCampaignRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CampaignClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.campaign.<a href="/src/api/resources/campaign/client/Client.ts">runCampaign</a>({ ...params }) -> FlaqzApp.RunCampaignResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.campaign.runCampaign({
+    id: "df727d0e-a169-4e24-8b5e-637077d57f35"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.RunCampaignRequest` 
     
 </dd>
 </dl>

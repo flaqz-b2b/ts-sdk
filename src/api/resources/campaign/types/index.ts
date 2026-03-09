@@ -4,5 +4,8 @@ export * from "./DeleteCampaignResponse.js";
 export * from "./DeleteCampaignResponseOthers.js";
 export * from "./PublishCampaignResponse.js";
 export * from "./PublishCampaignResponseOthers.js";
+export * from "./RunCampaignResponse.js";
+export * from "./RunCampaignResponseOthers.js";
+export * from "./RunCampaignResponseOthersData.js";
 export * from "./UpdateCampaignResponse.js";
 export * from "./UpdateCampaignResponseOthers.js";
