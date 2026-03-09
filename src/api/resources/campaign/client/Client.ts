@@ -28,6 +28,7 @@ export class CampaignClient {
      *
      * @example
      *     await client.campaign.createCampaign({
+     *         campaignName: "My Awesome Campaign",
      *         assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
      *         customers: [{
      *                 id: "8f727d7e-a169-4e24-8b5e-637077d57f35",
@@ -127,6 +128,7 @@ export class CampaignClient {
      *     await client.campaign.updateCampaign({
      *         id: "id",
      *         newData: {
+     *             campaignName: "My Awesome Campaign",
      *             assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
      *             customers: [{
      *                     id: "8f727d7e-a169-4e24-8b5e-637077d57f35",

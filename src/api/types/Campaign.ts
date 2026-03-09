@@ -7,6 +7,7 @@ import type * as FlaqzApp from "../index.js";
  */
 export interface Campaign {
     id: string;
+    campaignName: string;
     assistantId: string;
     customers: FlaqzApp.Customer[];
     published: boolean;

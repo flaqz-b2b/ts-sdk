@@ -6,6 +6,7 @@ import type * as FlaqzApp from "../index.js";
  * This is the typ for campaigns in our application
  */
 export interface CreateCampaignInput {
+    campaignName: string;
     assistantId: string;
     customers: FlaqzApp.Customer[];
     published: boolean;

@@ -9,6 +9,7 @@ export const CreateCampaignInput: core.serialization.ObjectSchema<
     serializers.CreateCampaignInput.Raw,
     FlaqzApp.CreateCampaignInput
 > = core.serialization.object({
+    campaignName: core.serialization.string(),
     assistantId: core.serialization.string(),
     customers: core.serialization.list(Customer),
     published: core.serialization.boolean(),
@@ -16,6 +17,7 @@ export const CreateCampaignInput: core.serialization.ObjectSchema<
 
 export declare namespace CreateCampaignInput {
     export interface Raw {
+        campaignName: string;
         assistantId: string;
         customers: Customer.Raw[];
         published: boolean;
