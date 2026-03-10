@@ -8,11 +8,11 @@ export const RunCampaignResponseOthersData: core.serialization.ObjectSchema<
     serializers.RunCampaignResponseOthersData.Raw,
     FlaqzApp.RunCampaignResponseOthersData
 > = core.serialization.object({
-    vapiCampaignId: core.serialization.string(),
+    id: core.serialization.string(),
 });
 
 export declare namespace RunCampaignResponseOthersData {
     export interface Raw {
-        vapiCampaignId: string;
+        id: string;
     }
 }
