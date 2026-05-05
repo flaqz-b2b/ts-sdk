@@ -9,7 +9,7 @@ import type * as FlaqzApp from "../../../../index.js";
  *                 email: "awesome@customer.com",
  *                 fullName: "Awesome Customer",
  *                 phoneNumber: "+10000000000",
- *                 ppInfo: "Under financial history analisys"
+ *                 ppInfo: "Under financial history analysis"
  *             }]
  *     }
  */

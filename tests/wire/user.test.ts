@@ -3,8 +3,8 @@
 import { FlaqzAppClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("CustomerClient", () => {
-    test("getAllCustomers", async () => {
+describe("UserClient", () => {
+    test("getUsers", async () => {
         const server = mockServerPool.createServer();
         const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
 
@@ -16,18 +16,16 @@ describe("CustomerClient", () => {
                 data: [
                     {
                         id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                        email: "awesome@customer.com",
-                        fullName: "Awesome Customer",
-                        phoneNumber: "+10000000000",
-                        ppInfo: "Under financial history analysis",
+                        email: "user@example.com",
+                        username: "johndoe",
                         createdAt: "2000-01-01T00:00:00Z",
                     },
                 ],
             },
         };
-        server.mockEndpoint().get("/api/v1/customers").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/api/v1/users").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.customer.getAllCustomers();
+        const response = await client.user.getUsers();
         expect(response).toEqual({
             status: 1,
             success: true,
@@ -36,10 +34,8 @@ describe("CustomerClient", () => {
                 data: [
                     {
                         id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                        email: "awesome@customer.com",
-                        fullName: "Awesome Customer",
-                        phoneNumber: "+10000000000",
-                        ppInfo: "Under financial history analysis",
+                        email: "user@example.com",
+                        username: "johndoe",
                         createdAt: new Date("2000-01-01T00:00:00.000Z"),
                     },
                 ],
@@ -47,50 +43,53 @@ describe("CustomerClient", () => {
         });
     });
 
-    test("createManyCustomers", async () => {
+    test("createUser", async () => {
         const server = mockServerPool.createServer();
         const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
-        const rawRequestBody = {
-            customers: [
-                {
-                    email: "awesome@customer.com",
-                    fullName: "Awesome Customer",
-                    phoneNumber: "+10000000000",
-                    ppInfo: "Under financial history analysis",
+        const rawRequestBody = { email: "user@example.com", username: "johndoe", pass: "securepassword" };
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    email: "user@example.com",
+                    username: "johndoe",
+                    createdAt: "2000-01-01T00:00:00Z",
                 },
-            ],
+            },
         };
-        const rawResponseBody = { status: 1, success: true, message: "message", others: { data: ["data"] } };
         server
             .mockEndpoint()
-            .post("/api/v1/many-customers")
+            .post("/api/v1/users")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.customer.createManyCustomers({
-            customers: [
-                {
-                    email: "awesome@customer.com",
-                    fullName: "Awesome Customer",
-                    phoneNumber: "+10000000000",
-                    ppInfo: "Under financial history analysis",
-                },
-            ],
+        const response = await client.user.createUser({
+            email: "user@example.com",
+            username: "johndoe",
+            pass: "securepassword",
         });
         expect(response).toEqual({
             status: 1,
             success: true,
             message: "message",
             others: {
-                data: ["data"],
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    email: "user@example.com",
+                    username: "johndoe",
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                },
             },
         });
     });
 
-    test("searchCustomers", async () => {
+    test("searchUsers", async () => {
         const server = mockServerPool.createServer();
         const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
 
@@ -103,10 +102,8 @@ describe("CustomerClient", () => {
                     data: [
                         {
                             id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                            email: "awesome@customer.com",
-                            fullName: "Awesome Customer",
-                            phoneNumber: "+10000000000",
-                            ppInfo: "Under financial history analysis",
+                            email: "user@example.com",
+                            username: "johndoe",
                             createdAt: "2000-01-01T00:00:00Z",
                         },
                     ],
@@ -116,16 +113,16 @@ describe("CustomerClient", () => {
         };
         server
             .mockEndpoint()
-            .get("/api/v1/customers/search")
+            .get("/api/v1/users/search")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.customer.searchCustomers({
+        const response = await client.user.searchUsers({
             page: 1,
             pageSize: 20,
-            query: "Awesome Customer",
+            query: "johndoe",
         });
         expect(response).toEqual({
             status: 1,
@@ -136,16 +133,38 @@ describe("CustomerClient", () => {
                     data: [
                         {
                             id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
-                            email: "awesome@customer.com",
-                            fullName: "Awesome Customer",
-                            phoneNumber: "+10000000000",
-                            ppInfo: "Under financial history analysis",
+                            email: "user@example.com",
+                            username: "johndoe",
                             createdAt: new Date("2000-01-01T00:00:00.000Z"),
                         },
                     ],
                     total: 1,
                 },
             },
+        });
+    });
+
+    test("deleteUser", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+
+        const rawResponseBody = { status: 1, success: true, message: "message", others: {} };
+        server
+            .mockEndpoint()
+            .delete("/api/v1/users/id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.user.deleteUser({
+            id: "id",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {},
         });
     });
 });

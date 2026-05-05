@@ -6,6 +6,7 @@ import { CampaignsClient } from "./api/resources/campaigns/client/Client.js";
 import { CustomerClient } from "./api/resources/customer/client/Client.js";
 import { ModelClient } from "./api/resources/model/client/Client.js";
 import { TranscriberClient } from "./api/resources/transcriber/client/Client.js";
+import { UserClient } from "./api/resources/user/client/Client.js";
 import { VoiceClient } from "./api/resources/voice/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { normalizeClientOptions } from "./BaseClient.js";
@@ -19,6 +20,7 @@ export declare namespace FlaqzAppClient {
 export class FlaqzAppClient {
     protected readonly _options: FlaqzAppClient.Options;
     protected _customer: CustomerClient | undefined;
+    protected _user: UserClient | undefined;
     protected _assistant: AssistantClient | undefined;
     protected _model: ModelClient | undefined;
     protected _transcriber: TranscriberClient | undefined;
@@ -32,6 +34,10 @@ export class FlaqzAppClient {
 
     public get customer(): CustomerClient {
         return (this._customer ??= new CustomerClient(this._options));
+    }
+
+    public get user(): UserClient {
+        return (this._user ??= new UserClient(this._options));
     }
 
     public get assistant(): AssistantClient {
