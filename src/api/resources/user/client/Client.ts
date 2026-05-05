@@ -9,41 +9,39 @@ import * as errors from "../../../../errors/index.js";
 import * as serializers from "../../../../serialization/index.js";
 import type * as FlaqzApp from "../../../index.js";
 
-export declare namespace CustomerClient {
+export declare namespace UserClient {
     export interface Options extends BaseClientOptions {}
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-export class CustomerClient {
-    protected readonly _options: CustomerClient.Options;
+export class UserClient {
+    protected readonly _options: UserClient.Options;
 
-    constructor(options: CustomerClient.Options = {}) {
+    constructor(options: UserClient.Options = {}) {
         this._options = normalizeClientOptions(options);
     }
 
     /**
-     * @param {CustomerClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {UserClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.customer.getAllCustomers()
+     *     await client.user.getUsers()
      */
-    public getAllCustomers(
-        requestOptions?: CustomerClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.GetAllCustomersResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getAllCustomers(requestOptions));
+    public getUsers(requestOptions?: UserClient.RequestOptions): core.HttpResponsePromise<FlaqzApp.GetUsersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__getUsers(requestOptions));
     }
 
-    private async __getAllCustomers(
-        requestOptions?: CustomerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.GetAllCustomersResponse>> {
+    private async __getUsers(
+        requestOptions?: UserClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.GetUsersResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FlaqzAppEnvironment.Default,
-                "api/v1/customers",
+                "api/v1/users",
             ),
             method: "GET",
             headers: _headers,
@@ -56,7 +54,7 @@ export class CustomerClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.GetAllCustomersResponse.parseOrThrow(_response.body, {
+                data: serializers.GetUsersResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -83,7 +81,7 @@ export class CustomerClient {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/customers.");
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/users.");
             case "unknown":
                 throw new errors.FlaqzAppError({
                     message: _response.error.errorMessage,
@@ -93,44 +91,41 @@ export class CustomerClient {
     }
 
     /**
-     * @param {FlaqzApp.CreateManyCustomersSchema} request
-     * @param {CustomerClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {FlaqzApp.CreateUserInput} request
+     * @param {UserClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.customer.createManyCustomers({
-     *         customers: [{
-     *                 email: "awesome@customer.com",
-     *                 fullName: "Awesome Customer",
-     *                 phoneNumber: "+10000000000",
-     *                 ppInfo: "Under financial history analysis"
-     *             }]
+     *     await client.user.createUser({
+     *         email: "user@example.com",
+     *         username: "johndoe",
+     *         pass: "securepassword"
      *     })
      */
-    public createManyCustomers(
-        request: FlaqzApp.CreateManyCustomersSchema,
-        requestOptions?: CustomerClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.CreateManyCustomersResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__createManyCustomers(request, requestOptions));
+    public createUser(
+        request: FlaqzApp.CreateUserInput,
+        requestOptions?: UserClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.CreateUserResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createUser(request, requestOptions));
     }
 
-    private async __createManyCustomers(
-        request: FlaqzApp.CreateManyCustomersSchema,
-        requestOptions?: CustomerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.CreateManyCustomersResponse>> {
+    private async __createUser(
+        request: FlaqzApp.CreateUserInput,
+        requestOptions?: UserClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.CreateUserResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FlaqzAppEnvironment.Default,
-                "api/v1/many-customers",
+                "api/v1/users",
             ),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
             queryParameters: requestOptions?.queryParams,
             requestType: "json",
-            body: serializers.CreateManyCustomersSchema.jsonOrThrow(request, {
+            body: serializers.CreateUserInput.jsonOrThrow(request, {
                 unrecognizedObjectKeys: "strip",
                 omitUndefined: true,
             }),
@@ -142,7 +137,7 @@ export class CustomerClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.CreateManyCustomersResponse.parseOrThrow(_response.body, {
+                data: serializers.CreateUserResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -169,7 +164,7 @@ export class CustomerClient {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling POST /api/v1/many-customers.");
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling POST /api/v1/users.");
             case "unknown":
                 throw new errors.FlaqzAppError({
                     message: _response.error.errorMessage,
@@ -179,27 +174,27 @@ export class CustomerClient {
     }
 
     /**
-     * @param {FlaqzApp.SearchCustomersRequest} request
-     * @param {CustomerClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {FlaqzApp.SearchUsersRequest} request
+     * @param {UserClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.customer.searchCustomers({
+     *     await client.user.searchUsers({
      *         page: 1,
      *         pageSize: 20,
-     *         query: "Awesome Customer"
+     *         query: "johndoe"
      *     })
      */
-    public searchCustomers(
-        request: FlaqzApp.SearchCustomersRequest,
-        requestOptions?: CustomerClient.RequestOptions,
-    ): core.HttpResponsePromise<FlaqzApp.SearchCustomersResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__searchCustomers(request, requestOptions));
+    public searchUsers(
+        request: FlaqzApp.SearchUsersRequest,
+        requestOptions?: UserClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.SearchUsersResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__searchUsers(request, requestOptions));
     }
 
-    private async __searchCustomers(
-        request: FlaqzApp.SearchCustomersRequest,
-        requestOptions?: CustomerClient.RequestOptions,
-    ): Promise<core.WithRawResponse<FlaqzApp.SearchCustomersResponse>> {
+    private async __searchUsers(
+        request: FlaqzApp.SearchUsersRequest,
+        requestOptions?: UserClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.SearchUsersResponse>> {
         const { page, pageSize, query } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams.page = page.toString();
@@ -211,7 +206,7 @@ export class CustomerClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.FlaqzAppEnvironment.Default,
-                "api/v1/customers/search",
+                "api/v1/users/search",
             ),
             method: "GET",
             headers: _headers,
@@ -224,7 +219,7 @@ export class CustomerClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.SearchCustomersResponse.parseOrThrow(_response.body, {
+                data: serializers.SearchUsersResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -251,7 +246,83 @@ export class CustomerClient {
                     rawResponse: _response.rawResponse,
                 });
             case "timeout":
-                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/customers/search.");
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling GET /api/v1/users/search.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * @param {FlaqzApp.DeleteUserRequest} request
+     * @param {UserClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.user.deleteUser({
+     *         id: "id"
+     *     })
+     */
+    public deleteUser(
+        request: FlaqzApp.DeleteUserRequest,
+        requestOptions?: UserClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.DeleteUserResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteUser(request, requestOptions));
+    }
+
+    private async __deleteUser(
+        request: FlaqzApp.DeleteUserRequest,
+        requestOptions?: UserClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.DeleteUserResponse>> {
+        const { id } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/users/${core.url.encodePathParam(id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.DeleteUserResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling DELETE /api/v1/users/{id}.");
             case "unknown":
                 throw new errors.FlaqzAppError({
                     message: _response.error.errorMessage,
