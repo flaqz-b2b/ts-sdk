@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("AssistantClient", () => {
     test("getAssistants", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -123,7 +123,7 @@ describe("AssistantClient", () => {
 
     test("createAssistant", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
             name: "My Assistant 01",
             voiceId: "5d9f0c21-2c4a-4b4d-8b8b-aad2de5542f3",
@@ -269,7 +269,7 @@ describe("AssistantClient", () => {
 
     test("updateAssistant", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
             newData: {
                 name: "My Assistant 01",
@@ -420,7 +420,7 @@ describe("AssistantClient", () => {
 
     test("searchAssistants", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -553,7 +553,7 @@ describe("AssistantClient", () => {
 
     test("searchCampaigns", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,

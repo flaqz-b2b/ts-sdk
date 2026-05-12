@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("VoiceClient", () => {
     test("getVoices", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -59,7 +59,7 @@ describe("VoiceClient", () => {
 
     test("createVoice", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
             provider: "11labs",
             model: "eleven_flash_v2",
@@ -135,7 +135,7 @@ describe("VoiceClient", () => {
 
     test("searchVoices", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,

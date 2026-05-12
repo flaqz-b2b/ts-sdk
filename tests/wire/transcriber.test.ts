@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("TranscriberClient", () => {
     test("gettranscribers", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -53,7 +53,7 @@ describe("TranscriberClient", () => {
 
     test("createTranscriber", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "nova-2", language: "pt-BR", provider: "deepgram" };
         const rawResponseBody = {
             status: 1,
@@ -101,7 +101,7 @@ describe("TranscriberClient", () => {
 
     test("searchTranscribers", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,

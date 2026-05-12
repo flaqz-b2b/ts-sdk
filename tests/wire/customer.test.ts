@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("CustomerClient", () => {
     test("getAllCustomers", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -49,7 +49,7 @@ describe("CustomerClient", () => {
 
     test("createManyCustomers", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
             customers: [
                 {
@@ -92,7 +92,7 @@ describe("CustomerClient", () => {
 
     test("searchCustomers", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,

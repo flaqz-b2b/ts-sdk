@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("ModelClient", () => {
     test("getModels", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -49,7 +49,7 @@ describe("ModelClient", () => {
 
     test("createModel", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "llama-3.1-8b-instant", provider: "groq", maxTokens: 128, temperature: 0.6 };
         const rawResponseBody = {
             status: 1,
@@ -100,7 +100,7 @@ describe("ModelClient", () => {
 
     test("searchModels", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,

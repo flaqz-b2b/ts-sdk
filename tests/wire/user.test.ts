@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("UserClient", () => {
     test("getUsers", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -18,6 +18,7 @@ describe("UserClient", () => {
                         id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
                         email: "user@example.com",
                         username: "johndoe",
+                        role: "USER",
                         createdAt: "2000-01-01T00:00:00Z",
                     },
                 ],
@@ -36,6 +37,7 @@ describe("UserClient", () => {
                         id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
                         email: "user@example.com",
                         username: "johndoe",
+                        role: "USER",
                         createdAt: new Date("2000-01-01T00:00:00.000Z"),
                     },
                 ],
@@ -45,7 +47,7 @@ describe("UserClient", () => {
 
     test("createUser", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { email: "user@example.com", username: "johndoe", pass: "securepassword" };
         const rawResponseBody = {
             status: 1,
@@ -56,6 +58,7 @@ describe("UserClient", () => {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
                     email: "user@example.com",
                     username: "johndoe",
+                    role: "USER",
                     createdAt: "2000-01-01T00:00:00Z",
                 },
             },
@@ -83,6 +86,7 @@ describe("UserClient", () => {
                     id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
                     email: "user@example.com",
                     username: "johndoe",
+                    role: "USER",
                     createdAt: new Date("2000-01-01T00:00:00.000Z"),
                 },
             },
@@ -91,7 +95,7 @@ describe("UserClient", () => {
 
     test("searchUsers", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -104,6 +108,7 @@ describe("UserClient", () => {
                             id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
                             email: "user@example.com",
                             username: "johndoe",
+                            role: "USER",
                             createdAt: "2000-01-01T00:00:00Z",
                         },
                     ],
@@ -135,6 +140,7 @@ describe("UserClient", () => {
                             id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
                             email: "user@example.com",
                             username: "johndoe",
+                            role: "USER",
                             createdAt: new Date("2000-01-01T00:00:00.000Z"),
                         },
                     ],
@@ -146,7 +152,7 @@ describe("UserClient", () => {
 
     test("deleteUser", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: 1, success: true, message: "message", others: {} };
         server

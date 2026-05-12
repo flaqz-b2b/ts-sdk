@@ -6,7 +6,7 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 describe("CampaignClient", () => {
     test("Create Campaign", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
             campaignName: "My Awesome Campaign",
             assistantId: "8df037de-a169-4e24-8b5e-637077d57f35",
@@ -96,7 +96,7 @@ describe("CampaignClient", () => {
 
     test("updateCampaign", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
             newData: {
                 campaignName: "My Awesome Campaign",
@@ -191,7 +191,7 @@ describe("CampaignClient", () => {
 
     test("Delete Campaign", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: 1, success: true, message: "message", others: { data: "data" } };
         server
@@ -217,7 +217,7 @@ describe("CampaignClient", () => {
 
     test("Publish Campaign", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             status: 1,
@@ -298,7 +298,7 @@ describe("CampaignClient", () => {
 
     test("runCampaign", async () => {
         const server = mockServerPool.createServer();
-        const client = new FlaqzAppClient({ maxRetries: 0, environment: server.baseUrl });
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { status: 1, success: true, message: "message", others: { data: { id: "id" } } };
         server
