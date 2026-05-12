@@ -3,11 +3,13 @@
 import type * as FlaqzApp from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { UserRole } from "./UserRole.js";
 
 export const User: core.serialization.ObjectSchema<serializers.User.Raw, FlaqzApp.User> = core.serialization.object({
     id: core.serialization.string(),
     email: core.serialization.string(),
     username: core.serialization.string(),
+    role: UserRole,
     createdAt: core.serialization.date(),
 });
 
@@ -16,6 +18,7 @@ export declare namespace User {
         id: string;
         email: string;
         username: string;
+        role: UserRole.Raw;
         createdAt: string;
     }
 }
