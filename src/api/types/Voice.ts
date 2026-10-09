@@ -14,5 +14,6 @@ export interface Voice {
     stability: number;
     similarity: number;
     optimize: number;
+    isDefault: boolean;
     createdAt: Date;
 }

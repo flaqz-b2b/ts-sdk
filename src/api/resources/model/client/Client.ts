@@ -257,4 +257,244 @@ export class ModelClient {
                 });
         }
     }
+
+    /**
+     * @param {FlaqzApp.UpdateModelRequest} request
+     * @param {ModelClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.model.updateModel({
+     *         id: "id",
+     *         body: {
+     *             model: "llama-3.1-8b-instant",
+     *             provider: "groq",
+     *             maxTokens: 128,
+     *             temperature: 0.6
+     *         }
+     *     })
+     */
+    public updateModel(
+        request: FlaqzApp.UpdateModelRequest,
+        requestOptions?: ModelClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.UpdateModelResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateModel(request, requestOptions));
+    }
+
+    private async __updateModel(
+        request: FlaqzApp.UpdateModelRequest,
+        requestOptions?: ModelClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.UpdateModelResponse>> {
+        const { id, body: _body } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/models/${core.url.encodePathParam(id)}`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.CreateModelInput.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+                omitUndefined: true,
+            }),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.UpdateModelResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling PUT /api/v1/models/{id}.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * @param {FlaqzApp.DeleteModelRequest} request
+     * @param {ModelClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.model.deleteModel({
+     *         id: "id"
+     *     })
+     */
+    public deleteModel(
+        request: FlaqzApp.DeleteModelRequest,
+        requestOptions?: ModelClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.DeleteModelResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteModel(request, requestOptions));
+    }
+
+    private async __deleteModel(
+        request: FlaqzApp.DeleteModelRequest,
+        requestOptions?: ModelClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.DeleteModelResponse>> {
+        const { id } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/models/${core.url.encodePathParam(id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.DeleteModelResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling DELETE /api/v1/models/{id}.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * @param {FlaqzApp.SetDefaultModelRequest} request
+     * @param {ModelClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.model.setDefaultModel({
+     *         id: "id"
+     *     })
+     */
+    public setDefaultModel(
+        request: FlaqzApp.SetDefaultModelRequest,
+        requestOptions?: ModelClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.SetDefaultModelResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__setDefaultModel(request, requestOptions));
+    }
+
+    private async __setDefaultModel(
+        request: FlaqzApp.SetDefaultModelRequest,
+        requestOptions?: ModelClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.SetDefaultModelResponse>> {
+        const { id } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/models/${core.url.encodePathParam(id)}/default`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.SetDefaultModelResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling PUT /api/v1/models/{id}/default.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

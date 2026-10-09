@@ -1,3 +1,5 @@
+export * from "./CreateCustomerResponse.js";
+export * from "./CreateCustomerResponseOthers.js";
 export * from "./CreateManyCustomersResponse.js";
 export * from "./CreateManyCustomersResponseOthers.js";
 export * from "./GetAllCustomersResponse.js";

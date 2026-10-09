@@ -20,6 +20,7 @@ describe("ModelClient", () => {
                         provider: "groq",
                         maxTokens: 128,
                         temperature: 0.6,
+                        isDefault: false,
                         createdAt: "2000-01-01T00:00:00Z",
                     },
                 ],
@@ -40,6 +41,7 @@ describe("ModelClient", () => {
                         provider: "groq",
                         maxTokens: 128,
                         temperature: 0.6,
+                        isDefault: false,
                         createdAt: new Date("2000-01-01T00:00:00.000Z"),
                     },
                 ],
@@ -62,6 +64,7 @@ describe("ModelClient", () => {
                     provider: "groq",
                     maxTokens: 128,
                     temperature: 0.6,
+                    isDefault: false,
                     createdAt: "2000-01-01T00:00:00Z",
                 },
             },
@@ -92,6 +95,7 @@ describe("ModelClient", () => {
                     provider: "groq",
                     maxTokens: 128,
                     temperature: 0.6,
+                    isDefault: false,
                     createdAt: new Date("2000-01-01T00:00:00.000Z"),
                 },
             },
@@ -115,6 +119,7 @@ describe("ModelClient", () => {
                             provider: "groq",
                             maxTokens: 128,
                             temperature: 0.6,
+                            isDefault: false,
                             createdAt: "2000-01-01T00:00:00Z",
                         },
                     ],
@@ -148,10 +153,149 @@ describe("ModelClient", () => {
                             provider: "groq",
                             maxTokens: 128,
                             temperature: 0.6,
+                            isDefault: false,
                             createdAt: new Date("2000-01-01T00:00:00.000Z"),
                         },
                     ],
                     total: 1,
+                },
+            },
+        });
+    });
+
+    test("updateModel", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { model: "llama-3.1-8b-instant", provider: "groq", maxTokens: 128, temperature: 0.6 };
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "llama-3.1-8b-instant",
+                    provider: "groq",
+                    maxTokens: 128,
+                    temperature: 0.6,
+                    isDefault: false,
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .put("/api/v1/models/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.model.updateModel({
+            id: "id",
+            body: {
+                model: "llama-3.1-8b-instant",
+                provider: "groq",
+                maxTokens: 128,
+                temperature: 0.6,
+            },
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "llama-3.1-8b-instant",
+                    provider: "groq",
+                    maxTokens: 128,
+                    temperature: 0.6,
+                    isDefault: false,
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                },
+            },
+        });
+    });
+
+    test("deleteModel", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: { data: { deleted: "deleted" } },
+        };
+        server
+            .mockEndpoint()
+            .delete("/api/v1/models/id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.model.deleteModel({
+            id: "id",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    deleted: "deleted",
+                },
+            },
+        });
+    });
+
+    test("setDefaultModel", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "llama-3.1-8b-instant",
+                    provider: "groq",
+                    maxTokens: 128,
+                    temperature: 0.6,
+                    isDefault: false,
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .put("/api/v1/models/id/default")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.model.setDefaultModel({
+            id: "id",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "llama-3.1-8b-instant",
+                    provider: "groq",
+                    maxTokens: 128,
+                    temperature: 0.6,
+                    isDefault: false,
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
                 },
             },
         });

@@ -25,6 +25,7 @@ describe("VoiceClient", () => {
                         stability: 0.5,
                         similarity: 0.5,
                         optimize: 2,
+                        isDefault: false,
                         createdAt: "2000-01-01T00:00:00Z",
                     },
                 ],
@@ -50,6 +51,7 @@ describe("VoiceClient", () => {
                         stability: 0.5,
                         similarity: 0.5,
                         optimize: 2,
+                        isDefault: false,
                         createdAt: new Date("2000-01-01T00:00:00.000Z"),
                     },
                 ],
@@ -87,6 +89,7 @@ describe("VoiceClient", () => {
                     stability: 0.5,
                     similarity: 0.5,
                     optimize: 2,
+                    isDefault: false,
                     createdAt: "2000-01-01T00:00:00Z",
                 },
             },
@@ -127,6 +130,7 @@ describe("VoiceClient", () => {
                     stability: 0.5,
                     similarity: 0.5,
                     optimize: 2,
+                    isDefault: false,
                     createdAt: new Date("2000-01-01T00:00:00.000Z"),
                 },
             },
@@ -155,6 +159,7 @@ describe("VoiceClient", () => {
                             stability: 0.5,
                             similarity: 0.5,
                             optimize: 2,
+                            isDefault: false,
                             createdAt: "2000-01-01T00:00:00Z",
                         },
                     ],
@@ -193,10 +198,184 @@ describe("VoiceClient", () => {
                             stability: 0.5,
                             similarity: 0.5,
                             optimize: 2,
+                            isDefault: false,
                             createdAt: new Date("2000-01-01T00:00:00.000Z"),
                         },
                     ],
                     total: 1,
+                },
+            },
+        });
+    });
+
+    test("updateVoice", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            provider: "11labs",
+            model: "eleven_flash_v2",
+            voiceId: "33B4UnXyTNbgLmdEDh5P",
+            autoMode: true,
+            speed: 1,
+            style: 0,
+            stability: 0.5,
+            similarity: 0.5,
+            optimize: 2,
+        };
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    provider: "11labs",
+                    model: "eleven_flash_v2",
+                    voiceId: "33B4UnXyTNbgLmdEDh5P",
+                    autoMode: true,
+                    speed: 1,
+                    style: 0,
+                    stability: 0.5,
+                    similarity: 0.5,
+                    optimize: 2,
+                    isDefault: false,
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .put("/api/v1/voices/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.voice.updateVoice({
+            id: "id",
+            body: {
+                provider: "11labs",
+                model: "eleven_flash_v2",
+                voiceId: "33B4UnXyTNbgLmdEDh5P",
+                autoMode: true,
+                speed: 1,
+                style: 0,
+                stability: 0.5,
+                similarity: 0.5,
+                optimize: 2,
+            },
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    provider: "11labs",
+                    model: "eleven_flash_v2",
+                    voiceId: "33B4UnXyTNbgLmdEDh5P",
+                    autoMode: true,
+                    speed: 1,
+                    style: 0,
+                    stability: 0.5,
+                    similarity: 0.5,
+                    optimize: 2,
+                    isDefault: false,
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                },
+            },
+        });
+    });
+
+    test("deleteVoice", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: { data: { deleted: "deleted" } },
+        };
+        server
+            .mockEndpoint()
+            .delete("/api/v1/voices/id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.voice.deleteVoice({
+            id: "id",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    deleted: "deleted",
+                },
+            },
+        });
+    });
+
+    test("setDefaultVoice", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    provider: "11labs",
+                    model: "eleven_flash_v2",
+                    voiceId: "33B4UnXyTNbgLmdEDh5P",
+                    autoMode: true,
+                    speed: 1,
+                    style: 0,
+                    stability: 0.5,
+                    similarity: 0.5,
+                    optimize: 2,
+                    isDefault: false,
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .put("/api/v1/voices/id/default")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.voice.setDefaultVoice({
+            id: "id",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    provider: "11labs",
+                    model: "eleven_flash_v2",
+                    voiceId: "33B4UnXyTNbgLmdEDh5P",
+                    autoMode: true,
+                    speed: 1,
+                    style: 0,
+                    stability: 0.5,
+                    similarity: 0.5,
+                    optimize: 2,
+                    isDefault: false,
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
                 },
             },
         });

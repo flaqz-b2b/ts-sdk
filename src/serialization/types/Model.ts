@@ -10,6 +10,7 @@ export const Model: core.serialization.ObjectSchema<serializers.Model.Raw, Flaqz
     provider: core.serialization.string(),
     maxTokens: core.serialization.number(),
     temperature: core.serialization.number(),
+    isDefault: core.serialization.boolean(),
     createdAt: core.serialization.date(),
 });
 
@@ -20,6 +21,7 @@ export declare namespace Model {
         provider: string;
         maxTokens: number;
         temperature: number;
+        isDefault: boolean;
         createdAt: string;
     }
 }

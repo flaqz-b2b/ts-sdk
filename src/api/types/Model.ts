@@ -9,5 +9,6 @@ export interface Model {
     provider: string;
     maxTokens: number;
     temperature: number;
+    isDefault: boolean;
     createdAt: Date;
 }

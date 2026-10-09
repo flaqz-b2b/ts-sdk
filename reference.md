@@ -196,6 +196,60 @@ await client.customer.getAllCustomers();
 </dl>
 </details>
 
+<details><summary><code>client.customer.<a href="/src/api/resources/customer/client/Client.ts">createCustomer</a>({ ...params }) -> FlaqzApp.CreateCustomerResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.customer.createCustomer({
+    email: "awesome@customer.com",
+    fullName: "Awesome Customer",
+    phoneNumber: "+10000000000",
+    ppInfo: "Under financial history analysis"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.CreateCustomerInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CustomerClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.customer.<a href="/src/api/resources/customer/client/Client.ts">createManyCustomers</a>({ ...params }) -> FlaqzApp.CreateManyCustomersResponse</code></summary>
 <dl>
 <dd>
@@ -928,6 +982,165 @@ await client.model.searchModels({
 </dl>
 </details>
 
+<details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">updateModel</a>({ ...params }) -> FlaqzApp.UpdateModelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.model.updateModel({
+    id: "id",
+    body: {
+        model: "llama-3.1-8b-instant",
+        provider: "groq",
+        maxTokens: 128,
+        temperature: 0.6
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.UpdateModelRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">deleteModel</a>({ ...params }) -> FlaqzApp.DeleteModelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.model.deleteModel({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.DeleteModelRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.model.<a href="/src/api/resources/model/client/Client.ts">setDefaultModel</a>({ ...params }) -> FlaqzApp.SetDefaultModelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.model.setDefaultModel({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SetDefaultModelRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Transcriber
 <details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">gettranscribers</a>() -> FlaqzApp.GettranscribersResponse</code></summary>
 <dl>
@@ -1057,6 +1270,164 @@ await client.transcriber.searchTranscribers({
 <dd>
 
 **request:** `FlaqzApp.SearchTranscribersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriberClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">updateTranscriber</a>({ ...params }) -> FlaqzApp.UpdateTranscriberResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.transcriber.updateTranscriber({
+    id: "id",
+    body: {
+        model: "nova-2",
+        language: "pt-BR",
+        provider: "deepgram"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.UpdateTranscriberRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriberClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">deleteTranscriber</a>({ ...params }) -> FlaqzApp.DeleteTranscriberResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.transcriber.deleteTranscriber({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.DeleteTranscriberRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TranscriberClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.transcriber.<a href="/src/api/resources/transcriber/client/Client.ts">setDefaultTranscriber</a>({ ...params }) -> FlaqzApp.SetDefaultTranscriberResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.transcriber.setDefaultTranscriber({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SetDefaultTranscriberRequest` 
     
 </dd>
 </dl>
@@ -1211,6 +1582,170 @@ await client.voice.searchVoices({
 <dd>
 
 **request:** `FlaqzApp.SearchVoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoiceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">updateVoice</a>({ ...params }) -> FlaqzApp.UpdateVoiceResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voice.updateVoice({
+    id: "id",
+    body: {
+        provider: "11labs",
+        model: "eleven_flash_v2",
+        voiceId: "33B4UnXyTNbgLmdEDh5P",
+        autoMode: true,
+        speed: 1,
+        style: 0,
+        stability: 0.5,
+        similarity: 0.5,
+        optimize: 2
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.UpdateVoiceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoiceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">deleteVoice</a>({ ...params }) -> FlaqzApp.DeleteVoiceResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voice.deleteVoice({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.DeleteVoiceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VoiceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.voice.<a href="/src/api/resources/voice/client/Client.ts">setDefaultVoice</a>({ ...params }) -> FlaqzApp.SetDefaultVoiceResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.voice.setDefaultVoice({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `FlaqzApp.SetDefaultVoiceRequest` 
     
 </dd>
 </dl>

@@ -47,6 +47,62 @@ describe("CustomerClient", () => {
         });
     });
 
+    test("createCustomer", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            email: "awesome@customer.com",
+            fullName: "Awesome Customer",
+            phoneNumber: "+10000000000",
+            ppInfo: "Under financial history analysis",
+        };
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    email: "awesome@customer.com",
+                    fullName: "Awesome Customer",
+                    phoneNumber: "+10000000000",
+                    ppInfo: "Under financial history analysis",
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .post("/api/v1/customers")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.customer.createCustomer({
+            email: "awesome@customer.com",
+            fullName: "Awesome Customer",
+            phoneNumber: "+10000000000",
+            ppInfo: "Under financial history analysis",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    email: "awesome@customer.com",
+                    fullName: "Awesome Customer",
+                    phoneNumber: "+10000000000",
+                    ppInfo: "Under financial history analysis",
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                },
+            },
+        });
+    });
+
     test("createManyCustomers", async () => {
         const server = mockServerPool.createServer();
         const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
