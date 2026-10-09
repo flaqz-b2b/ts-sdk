@@ -10,6 +10,7 @@ export const Transcriber: core.serialization.ObjectSchema<serializers.Transcribe
         model: core.serialization.string(),
         language: core.serialization.string(),
         provider: core.serialization.string(),
+        isDefault: core.serialization.boolean(),
         createdAt: core.serialization.date(),
     });
 
@@ -19,6 +20,7 @@ export declare namespace Transcriber {
         model: string;
         language: string;
         provider: string;
+        isDefault: boolean;
         createdAt: string;
     }
 }

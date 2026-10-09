@@ -8,5 +8,6 @@ export interface Transcriber {
     model: string;
     language: string;
     provider: string;
+    isDefault: boolean;
     createdAt: Date;
 }

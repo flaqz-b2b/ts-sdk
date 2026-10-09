@@ -262,4 +262,249 @@ export class VoiceClient {
                 });
         }
     }
+
+    /**
+     * @param {FlaqzApp.UpdateVoiceRequest} request
+     * @param {VoiceClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.voice.updateVoice({
+     *         id: "id",
+     *         body: {
+     *             provider: "11labs",
+     *             model: "eleven_flash_v2",
+     *             voiceId: "33B4UnXyTNbgLmdEDh5P",
+     *             autoMode: true,
+     *             speed: 1,
+     *             style: 0,
+     *             stability: 0.5,
+     *             similarity: 0.5,
+     *             optimize: 2
+     *         }
+     *     })
+     */
+    public updateVoice(
+        request: FlaqzApp.UpdateVoiceRequest,
+        requestOptions?: VoiceClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.UpdateVoiceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateVoice(request, requestOptions));
+    }
+
+    private async __updateVoice(
+        request: FlaqzApp.UpdateVoiceRequest,
+        requestOptions?: VoiceClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.UpdateVoiceResponse>> {
+        const { id, body: _body } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/voices/${core.url.encodePathParam(id)}`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.CreateVoiceInput.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+                omitUndefined: true,
+            }),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.UpdateVoiceResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling PUT /api/v1/voices/{id}.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * @param {FlaqzApp.DeleteVoiceRequest} request
+     * @param {VoiceClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.voice.deleteVoice({
+     *         id: "id"
+     *     })
+     */
+    public deleteVoice(
+        request: FlaqzApp.DeleteVoiceRequest,
+        requestOptions?: VoiceClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.DeleteVoiceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteVoice(request, requestOptions));
+    }
+
+    private async __deleteVoice(
+        request: FlaqzApp.DeleteVoiceRequest,
+        requestOptions?: VoiceClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.DeleteVoiceResponse>> {
+        const { id } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/voices/${core.url.encodePathParam(id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.DeleteVoiceResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling DELETE /api/v1/voices/{id}.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * @param {FlaqzApp.SetDefaultVoiceRequest} request
+     * @param {VoiceClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.voice.setDefaultVoice({
+     *         id: "id"
+     *     })
+     */
+    public setDefaultVoice(
+        request: FlaqzApp.SetDefaultVoiceRequest,
+        requestOptions?: VoiceClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.SetDefaultVoiceResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__setDefaultVoice(request, requestOptions));
+    }
+
+    private async __setDefaultVoice(
+        request: FlaqzApp.SetDefaultVoiceRequest,
+        requestOptions?: VoiceClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.SetDefaultVoiceResponse>> {
+        const { id } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/voices/${core.url.encodePathParam(id)}/default`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.SetDefaultVoiceResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling PUT /api/v1/voices/{id}/default.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

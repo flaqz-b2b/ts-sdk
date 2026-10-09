@@ -256,4 +256,247 @@ export class TranscriberClient {
                 });
         }
     }
+
+    /**
+     * @param {FlaqzApp.UpdateTranscriberRequest} request
+     * @param {TranscriberClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.transcriber.updateTranscriber({
+     *         id: "id",
+     *         body: {
+     *             model: "nova-2",
+     *             language: "pt-BR",
+     *             provider: "deepgram"
+     *         }
+     *     })
+     */
+    public updateTranscriber(
+        request: FlaqzApp.UpdateTranscriberRequest,
+        requestOptions?: TranscriberClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.UpdateTranscriberResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__updateTranscriber(request, requestOptions));
+    }
+
+    private async __updateTranscriber(
+        request: FlaqzApp.UpdateTranscriberRequest,
+        requestOptions?: TranscriberClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.UpdateTranscriberResponse>> {
+        const { id, body: _body } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/transcribers/${core.url.encodePathParam(id)}`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: serializers.CreateTranscriberInput.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+                omitUndefined: true,
+            }),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.UpdateTranscriberResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError("Timeout exceeded when calling PUT /api/v1/transcribers/{id}.");
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * @param {FlaqzApp.DeleteTranscriberRequest} request
+     * @param {TranscriberClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.transcriber.deleteTranscriber({
+     *         id: "id"
+     *     })
+     */
+    public deleteTranscriber(
+        request: FlaqzApp.DeleteTranscriberRequest,
+        requestOptions?: TranscriberClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.DeleteTranscriberResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteTranscriber(request, requestOptions));
+    }
+
+    private async __deleteTranscriber(
+        request: FlaqzApp.DeleteTranscriberRequest,
+        requestOptions?: TranscriberClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.DeleteTranscriberResponse>> {
+        const { id } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/transcribers/${core.url.encodePathParam(id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.DeleteTranscriberResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError(
+                    "Timeout exceeded when calling DELETE /api/v1/transcribers/{id}.",
+                );
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * @param {FlaqzApp.SetDefaultTranscriberRequest} request
+     * @param {TranscriberClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.transcriber.setDefaultTranscriber({
+     *         id: "id"
+     *     })
+     */
+    public setDefaultTranscriber(
+        request: FlaqzApp.SetDefaultTranscriberRequest,
+        requestOptions?: TranscriberClient.RequestOptions,
+    ): core.HttpResponsePromise<FlaqzApp.SetDefaultTranscriberResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__setDefaultTranscriber(request, requestOptions));
+    }
+
+    private async __setDefaultTranscriber(
+        request: FlaqzApp.SetDefaultTranscriberRequest,
+        requestOptions?: TranscriberClient.RequestOptions,
+    ): Promise<core.WithRawResponse<FlaqzApp.SetDefaultTranscriberResponse>> {
+        const { id } = request;
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.FlaqzAppEnvironment.Default,
+                `api/v1/transcribers/${core.url.encodePathParam(id)}/default`,
+            ),
+            method: "PUT",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.SetDefaultTranscriberResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.FlaqzAppError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.FlaqzAppError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.FlaqzAppTimeoutError(
+                    "Timeout exceeded when calling PUT /api/v1/transcribers/{id}/default.",
+                );
+            case "unknown":
+                throw new errors.FlaqzAppError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
 }

@@ -19,6 +19,7 @@ describe("TranscriberClient", () => {
                         model: "nova-2",
                         language: "pt-BR",
                         provider: "deepgram",
+                        isDefault: false,
                         createdAt: "2000-01-01T00:00:00Z",
                     },
                 ],
@@ -44,6 +45,7 @@ describe("TranscriberClient", () => {
                         model: "nova-2",
                         language: "pt-BR",
                         provider: "deepgram",
+                        isDefault: false,
                         createdAt: new Date("2000-01-01T00:00:00.000Z"),
                     },
                 ],
@@ -65,6 +67,7 @@ describe("TranscriberClient", () => {
                     model: "nova-2",
                     language: "pt-BR",
                     provider: "deepgram",
+                    isDefault: false,
                     createdAt: "2000-01-01T00:00:00Z",
                 },
             },
@@ -93,6 +96,7 @@ describe("TranscriberClient", () => {
                     model: "nova-2",
                     language: "pt-BR",
                     provider: "deepgram",
+                    isDefault: false,
                     createdAt: new Date("2000-01-01T00:00:00.000Z"),
                 },
             },
@@ -115,6 +119,7 @@ describe("TranscriberClient", () => {
                             model: "nova-2",
                             language: "pt-BR",
                             provider: "deepgram",
+                            isDefault: false,
                             createdAt: "2000-01-01T00:00:00Z",
                         },
                     ],
@@ -147,10 +152,144 @@ describe("TranscriberClient", () => {
                             model: "nova-2",
                             language: "pt-BR",
                             provider: "deepgram",
+                            isDefault: false,
                             createdAt: new Date("2000-01-01T00:00:00.000Z"),
                         },
                     ],
                     total: 1,
+                },
+            },
+        });
+    });
+
+    test("updateTranscriber", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { model: "nova-2", language: "pt-BR", provider: "deepgram" };
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "nova-2",
+                    language: "pt-BR",
+                    provider: "deepgram",
+                    isDefault: false,
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .put("/api/v1/transcribers/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.transcriber.updateTranscriber({
+            id: "id",
+            body: {
+                model: "nova-2",
+                language: "pt-BR",
+                provider: "deepgram",
+            },
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "nova-2",
+                    language: "pt-BR",
+                    provider: "deepgram",
+                    isDefault: false,
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
+                },
+            },
+        });
+    });
+
+    test("deleteTranscriber", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: { data: { deleted: "deleted" } },
+        };
+        server
+            .mockEndpoint()
+            .delete("/api/v1/transcribers/id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.transcriber.deleteTranscriber({
+            id: "id",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    deleted: "deleted",
+                },
+            },
+        });
+    });
+
+    test("setDefaultTranscriber", async () => {
+        const server = mockServerPool.createServer();
+        const client = new FlaqzAppClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "nova-2",
+                    language: "pt-BR",
+                    provider: "deepgram",
+                    isDefault: false,
+                    createdAt: "2000-01-01T00:00:00Z",
+                },
+            },
+        };
+        server
+            .mockEndpoint()
+            .put("/api/v1/transcribers/id/default")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.transcriber.setDefaultTranscriber({
+            id: "id",
+        });
+        expect(response).toEqual({
+            status: 1,
+            success: true,
+            message: "message",
+            others: {
+                data: {
+                    id: "6f727d0e-a169-4e24-8b5e-637077d57f35",
+                    model: "nova-2",
+                    language: "pt-BR",
+                    provider: "deepgram",
+                    isDefault: false,
+                    createdAt: new Date("2000-01-01T00:00:00.000Z"),
                 },
             },
         });
